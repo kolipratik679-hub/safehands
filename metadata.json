@@ -1,0 +1,6 @@
+{
+  "name": "Safehands Enterprises",
+  "description": "Client Coordination, Documentation & Administrative Support Services in Panvel, Vadghar, Pushpak and nearby areas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
