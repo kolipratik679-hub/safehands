@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import { PageRoute } from '../types';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { ALL_SERVICES_DATA } from '../data/servicesData';
+import { WhatsAppIcon } from '../components/WhatsAppIcon';
 import {
   MapPin,
   Phone,
   Mail,
   Clock,
-  MessageCircle,
   Send,
   CheckCircle2,
   Navigation,
   Sparkles,
+  ExternalLink,
 } from 'lucide-react';
 
 interface ContactPageProps {
@@ -87,7 +88,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                 </div>
 
                 <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 text-xs text-slate-700 leading-relaxed font-medium">
-                  Shop No. 4, Plot No. 284, Hari Vithal Complex, Sector R3, Pushpak Old Panvel, Vadghar, Raigad - 410206
+                  Shop No. 4, Plot No. 284, Hari Vithal Complex, Sector R3, Pushpak Old Panvel, Vadghar, Raigad - 410220
                 </div>
 
                 <div className="pt-2 text-xs text-slate-500 space-y-1">
@@ -96,36 +97,53 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                 </div>
               </div>
 
-              {/* Direct Reach Out Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Direct Reach Out Cards: Dual Phone Lines + WhatsApp */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <a
                   href="tel:+917666040771"
-                  className="p-4 rounded-xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-sm transition-all group"
+                  className="p-3.5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:shadow-sm transition-all group"
+                  title="Call 7666040771"
                 >
-                  <div className="flex items-center gap-2.5 text-xs text-slate-500 mb-1">
-                    <Phone className="w-4 h-4 text-blue-600" />
-                    <span>Call Support</span>
+                  <div className="flex items-center gap-1.5 text-xs text-slate-500 mb-1">
+                    <Phone className="w-3.5 h-3.5 text-blue-600" />
+                    <span>Call Line 1</span>
                   </div>
-                  <div className="text-sm font-bold text-slate-900 group-hover:text-blue-700">
-                    +91 7666040771
+                  <div className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-blue-700">
+                    7666040771
                   </div>
-                  <div className="text-[11px] text-slate-400 mt-0.5">Direct Desk</div>
+                  <div className="text-[10px] text-slate-400 mt-0.5">Direct Desk</div>
+                </a>
+
+                <a
+                  href="tel:+918097759771"
+                  className="p-3.5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:shadow-sm transition-all group"
+                  title="Call 8097759771"
+                >
+                  <div className="flex items-center gap-1.5 text-xs text-slate-500 mb-1">
+                    <Phone className="w-3.5 h-3.5 text-blue-600" />
+                    <span>Call Line 2</span>
+                  </div>
+                  <div className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-blue-700">
+                    8097759771
+                  </div>
+                  <div className="text-[10px] text-slate-400 mt-0.5">Support Desk</div>
                 </a>
 
                 <a
                   href="https://wa.me/917666040771?text=Hello%20Safehands%20Enterprises"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-4 rounded-xl bg-white border border-slate-200 hover:border-emerald-300 hover:shadow-sm transition-all group"
+                  className="p-3.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-400 hover:shadow-sm transition-all group"
+                  title="Chat on WhatsApp"
                 >
-                  <div className="flex items-center gap-2.5 text-xs text-slate-500 mb-1">
-                    <MessageCircle className="w-4 h-4 text-emerald-600" />
+                  <div className="flex items-center gap-1.5 text-xs text-slate-500 mb-1">
+                    <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-600 fill-emerald-600" />
                     <span>WhatsApp</span>
                   </div>
-                  <div className="text-sm font-bold text-slate-900 group-hover:text-emerald-700">
-                    +91 7666040771
+                  <div className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-emerald-700">
+                    7666040771
                   </div>
-                  <div className="text-[11px] text-slate-400 mt-0.5">Quick Chat</div>
+                  <div className="text-[10px] text-slate-400 mt-0.5">Instant Chat</div>
                 </a>
               </div>
 
@@ -183,7 +201,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                         rel="noopener noreferrer"
                         className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all"
                       >
-                        <MessageCircle className="w-4 h-4" />
+                        <WhatsAppIcon className="w-4 h-4 fill-white text-white" />
                         <span>Send to Safehands on WhatsApp</span>
                       </a>
                     </div>
@@ -298,6 +316,79 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
             </div>
 
           </div>
+
+          {/* Google Maps Section directly below Contact Form */}
+          <div className="mt-12 pt-10 border-t border-slate-200">
+            <div className="rounded-2xl bg-white border border-slate-200/90 shadow-sm overflow-hidden">
+              {/* Map Header with Address and Get Directions CTA */}
+              <div className="p-5 sm:p-6 bg-slate-50 border-b border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="space-y-1 max-w-2xl">
+                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-700">
+                    <MapPin className="w-4 h-4 text-blue-600 flex-shrink-0" />
+                    <span>Safehands Enterprises Desk Location</span>
+                  </div>
+                  <h3 className="text-base sm:text-lg font-extrabold text-slate-900">
+                    Find Us in Pushpak Old Panvel
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-700 font-medium select-all">
+                    Shop No. 4, Plot No. 284, Hari Vithal Complex, Sector R3, Pushpak Old Panvel, Vadghar, Raigad - 410220
+                  </p>
+                </div>
+
+                {/* Get Directions Action Buttons */}
+                <div className="flex items-center gap-2.5 flex-shrink-0">
+                  <a
+                    href="https://www.google.com/maps/dir/?api=1&destination=Shop+No.+4,+Plot+No.+284,+Hari+Vithal+Complex,+Sector+R3,+Pushpak+Old+Panvel,+Vadghar,+Raigad+410220"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    id="contact-get-directions-cta"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#0f2b5c] hover:bg-blue-900 text-white font-bold text-xs sm:text-sm shadow-md hover:shadow transition-all active:scale-95"
+                    title="Open Google Maps for turn-by-turn navigation"
+                  >
+                    <Navigation className="w-4 h-4 text-amber-300 fill-amber-300" />
+                    <span>Get Directions</span>
+                  </a>
+
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=Shop+No.+4,+Plot+No.+284,+Hari+Vithal+Complex,+Sector+R3,+Pushpak+Old+Panvel,+Vadghar,+Raigad+410220"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 font-semibold text-xs transition-colors"
+                    title="Open in Google Maps application"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5 text-slate-500" />
+                    <span>Open Map</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Embedded Responsive Google Map */}
+              <div className="relative w-full h-80 sm:h-96 bg-slate-100">
+                <iframe
+                  title="Safehands Enterprises Office Location Map"
+                  src="https://maps.google.com/maps?q=Shop+No.+4,+Plot+No.+284,+Hari+Vithal+Complex,+Sector+R3,+Pushpak+Old+Panvel,+Vadghar,+Raigad+410220&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                  className="w-full h-full border-0"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  aria-label="Google Map showing Safehands Enterprises in Pushpak Old Panvel"
+                />
+
+                {/* Clickable Overlay Link to ensure user can tap to open Google Maps directly */}
+                <div className="absolute bottom-3 right-3 z-10">
+                  <a
+                    href="https://www.google.com/maps/dir/?api=1&destination=Shop+No.+4,+Plot+No.+284,+Hari+Vithal+Complex,+Sector+R3,+Pushpak+Old+Panvel,+Vadghar,+Raigad+410220"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/95 hover:bg-white text-slate-800 text-[11px] font-bold shadow-md border border-slate-200 backdrop-blur-sm transition-transform active:scale-95"
+                  >
+                    <Navigation className="w-3.5 h-3.5 text-blue-600" />
+                    <span>Open in Maps App</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
     </div>

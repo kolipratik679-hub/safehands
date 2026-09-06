@@ -1,7 +1,8 @@
 import React from 'react';
 import { ServiceItem } from '../types';
 import { ServiceIcon } from './ServiceIcon';
-import { ArrowRight, Clock, FileCheck2, MessageCircle } from 'lucide-react';
+import { ArrowRight, Clock, FileCheck2 } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 interface ServiceCardProps {
   service: ServiceItem;
@@ -92,7 +93,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
           className="p-2 rounded-lg text-emerald-600 hover:bg-emerald-50 transition-colors"
           title="Ask on WhatsApp"
         >
-          <MessageCircle className="w-4 h-4 fill-emerald-600" />
+          <WhatsAppIcon className="w-4 h-4 text-emerald-600 fill-emerald-600" />
         </a>
       </div>
     </div>

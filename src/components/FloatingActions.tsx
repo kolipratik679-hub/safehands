@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { MessageCircle, Phone, Sparkles, X } from 'lucide-react';
+import { Phone, Sparkles, X } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 interface FloatingActionsProps {
   onOpenEnquiry: (serviceName?: string) => void;
@@ -15,11 +16,22 @@ export const FloatingActions: React.FC<FloatingActionsProps> = ({ onOpenEnquiry 
         <div className="flex flex-col items-end gap-2 mb-1 animate-in fade-in slide-in-from-bottom-2 duration-200">
           <a
             href="tel:+917666040771"
-            id="floating-call-button"
+            id="floating-call-button-1"
             className="flex items-center gap-2 px-4 py-2.5 bg-white text-slate-800 rounded-full shadow-lg border border-slate-200 hover:bg-slate-50 transition-transform active:scale-95 text-xs font-bold"
+            title="Call 7666040771"
           >
             <Phone className="w-4 h-4 text-blue-600" />
             <span>Call 7666040771</span>
+          </a>
+
+          <a
+            href="tel:+918097759771"
+            id="floating-call-button-2"
+            className="flex items-center gap-2 px-4 py-2.5 bg-white text-slate-800 rounded-full shadow-lg border border-slate-200 hover:bg-slate-50 transition-transform active:scale-95 text-xs font-bold"
+            title="Call 8097759771"
+          >
+            <Phone className="w-4 h-4 text-blue-600" />
+            <span>Call 8097759771</span>
           </a>
 
           <button
@@ -46,8 +58,9 @@ export const FloatingActions: React.FC<FloatingActionsProps> = ({ onOpenEnquiry 
           id="floating-whatsapp-direct"
           aria-label="Chat on WhatsApp"
           className="w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 active:scale-95"
+          title="Chat on WhatsApp"
         >
-          <MessageCircle className="w-6 h-6 fill-white" />
+          <WhatsAppIcon className="w-6 h-6 fill-white text-white" />
         </a>
 
         {/* Toggle Menu button */}

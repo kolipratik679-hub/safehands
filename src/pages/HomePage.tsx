@@ -7,6 +7,8 @@ import { PageRoute, ServiceCategory } from '../types';
 import { ServiceCard } from '../components/ServiceCard';
 import { ServiceIcon } from '../components/ServiceIcon';
 import { HeroTypewriter } from '../components/HeroTypewriter';
+import { HeroServiceShowcase } from '../components/HeroServiceShowcase';
+import { WhatsAppIcon } from '../components/WhatsAppIcon';
 import { ServiceTicker } from '../components/ServiceTicker';
 import heroPhoto from '../assets/images/hero_consultation_1788520674614.jpg';
 import officePhoto from '../assets/images/office_team_1788520698036.jpg';
@@ -84,9 +86,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenEnquiry })
               </div>
 
               {/* Main Headline with HeroTypewriter */}
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0f2b5c] tracking-tight leading-[1.2] font-display min-h-[5.6rem] sm:min-h-[4.8rem] lg:min-h-[7.2rem]">
-                Get Your Important Work Done — <br className="hidden sm:inline" />
-                With the <HeroTypewriter />
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0f2b5c] tracking-tight leading-[1.2] font-display min-h-[5.8rem] sm:min-h-0">
+                <span className="block sm:inline">Get Your Important Work Done —</span>{' '}
+                <br className="hidden sm:inline" />
+                <span className="block min-h-[2.8em] sm:min-h-0 sm:inline mt-1 sm:mt-0">
+                  With the <HeroTypewriter />
+                </span>
               </h1>
 
               {/* Subheadline description */}
@@ -112,7 +117,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenEnquiry })
                   id="hero-whatsapp-cta"
                   className="px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-sm hover:shadow transition-all flex items-center justify-center gap-2 active:scale-98"
                 >
-                  <MessageCircle className="w-4 h-4 fill-white" />
+                  <WhatsAppIcon className="w-4 h-4 fill-white text-white" />
                   <span>Chat on WhatsApp</span>
                 </a>
               </div>
@@ -138,104 +143,17 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenEnquiry })
               </div>
             </motion.div>
 
-            {/* Right Visual (lg:col-span-5) — Interactive Service Request Tracker with Consultation photo */}
+            {/* Right Visual (lg:col-span-5) — Dynamic Vertical Service Showcase */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.96, x: 20 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
+              initial={{ opacity: 0, scale: 0.96, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.15, ease: [0.21, 0.47, 0.32, 0.98] }}
               className="lg:col-span-5 relative"
             >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200/80 bg-white">
-                {/* Image Header */}
-                <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-slate-100">
-                  <img
-                    src={heroPhoto}
-                    alt="Safehands Consultation Desk in Panvel"
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
-                  <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-white">
-                    <div>
-                      <div className="text-[11px] font-bold uppercase tracking-wider text-amber-300">
-                        Live File Preparation
-                      </div>
-                      <div className="text-sm font-bold">Client Coordination Portal</div>
-                    </div>
-                    <span className="text-[10px] bg-emerald-500/90 text-white font-bold px-2 py-0.5 rounded-full backdrop-blur-sm">
-                      Active Desk
-                    </span>
-                  </div>
-                </div>
-
-                {/* Interactive Status Steps Card (From Reference Screenshot) */}
-                <div className="p-5 bg-white space-y-4">
-                  <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
-                    <span className="text-xs font-bold text-slate-800 uppercase tracking-wider">
-                      Your Service Request Flow
-                    </span>
-                    <span className="text-[11px] text-blue-700 font-semibold">
-                      Step-by-step
-                    </span>
-                  </div>
-
-                  <div className="space-y-3">
-                    {statusSteps.map((step, idx) => {
-                      const isDone = idx < activeStep;
-                      const isCurrent = idx === activeStep;
-
-                      return (
-                        <div
-                          key={idx}
-                          onClick={() => setActiveStep(idx)}
-                          className={`flex items-center justify-between p-2 rounded-lg cursor-pointer transition-colors text-xs ${
-                            isCurrent
-                              ? 'bg-blue-50/80 border border-blue-200 font-bold text-blue-900'
-                              : isDone
-                              ? 'text-slate-700 hover:bg-slate-50'
-                              : 'text-slate-400 hover:bg-slate-50'
-                          }`}
-                        >
-                          <div className="flex items-center gap-2.5">
-                            {isDone ? (
-                              <div className="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center flex-shrink-0">
-                                <Check className="w-3 h-3 stroke-[3]" />
-                              </div>
-                            ) : isCurrent ? (
-                              <div className="w-5 h-5 rounded-full bg-blue-600 text-white flex items-center justify-center flex-shrink-0 animate-pulse">
-                                <span className="text-[10px] font-bold">{idx + 1}</span>
-                              </div>
-                            ) : (
-                              <div className="w-5 h-5 rounded-full border border-slate-300 text-slate-400 flex items-center justify-center flex-shrink-0">
-                                <span className="text-[10px]">{idx + 1}</span>
-                              </div>
-                            )}
-                            <span>{step.label}</span>
-                          </div>
-
-                          <span className="text-[10px] uppercase font-bold">
-                            {isDone ? 'Verified' : isCurrent ? 'In Progress' : 'Upcoming'}
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                  {/* Help Card bottom bar */}
-                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
-                    <div className="flex items-center gap-1.5 text-slate-500">
-                      <Phone className="w-3.5 h-3.5 text-blue-600" />
-                      <span>Need quick help?</span>
-                    </div>
-                    <a
-                      href="tel:+917666040771"
-                      className="font-bold text-blue-700 hover:underline"
-                    >
-                      Call 7666040771
-                    </a>
-                  </div>
-                </div>
-              </div>
+              <HeroServiceShowcase
+                onSelectService={(slug) => onNavigate('service-detail', undefined, slug)}
+                onOpenEnquiry={onOpenEnquiry}
+              />
             </motion.div>
 
           </div>
@@ -360,8 +278,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenEnquiry })
             
             {/* Left Column: The 6 Pillars (lg:col-span-7) */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
               className="lg:col-span-7 space-y-8"
@@ -455,8 +373,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenEnquiry })
 
             {/* Right Column: Office Photo + Genuine Factual Milestones (lg:col-span-5) */}
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
               className="lg:col-span-5 space-y-4"
@@ -616,7 +534,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenEnquiry })
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 px-3 py-1.5 rounded-lg transition-colors"
                 >
-                  <MessageCircle className="w-3.5 h-3.5" />
+                  <WhatsAppIcon className="w-3.5 h-3.5 fill-white text-white" />
                   <span>Continue on WhatsApp</span>
                 </a>
               </div>
@@ -671,7 +589,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenEnquiry })
                     type="submit"
                     className="w-full py-2.5 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold shadow transition-all flex items-center justify-center gap-1.5 active:scale-98"
                   >
-                    <MessageCircle className="w-4 h-4 fill-white" />
+                    <WhatsAppIcon className="w-4 h-4 fill-white text-white" />
                     <span>Talk to Safehands</span>
                   </button>
                 </div>
@@ -900,7 +818,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenEnquiry })
               rel="noopener noreferrer"
               className="px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm shadow transition-all flex items-center gap-2 active:scale-98"
             >
-              <MessageCircle className="w-4 h-4 fill-white" />
+              <WhatsAppIcon className="w-4 h-4 fill-white text-white" />
               <span>WhatsApp: 7666040771</span>
             </a>
           </div>

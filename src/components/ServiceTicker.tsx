@@ -17,8 +17,8 @@ const TICKER_ITEMS = [
 
 export const ServiceTicker: React.FC = () => {
   return (
-    <div className="w-full bg-[#0b1f42] text-white py-3 overflow-hidden border-y border-blue-900/50 relative shadow-inner">
-      <div className="max-w-7xl mx-auto px-4 relative flex items-center">
+    <div className="w-full bg-[#0b1f42] text-white py-3 overflow-hidden border-y border-blue-900/50 relative shadow-inner max-w-full">
+      <div className="max-w-7xl mx-auto px-4 relative flex items-center min-w-0 overflow-hidden">
         {/* Static label pill on the left for context */}
         <div className="hidden md:flex items-center gap-1.5 pr-4 pl-1 text-[11px] font-bold uppercase tracking-wider text-amber-300 border-r border-blue-800/80 flex-shrink-0 z-10 bg-[#0b1f42]">
           <Sparkles className="w-3.5 h-3.5 text-amber-400" />
@@ -26,7 +26,7 @@ export const ServiceTicker: React.FC = () => {
         </div>
 
         {/* Continuous ticker track */}
-        <div className="overflow-hidden w-full select-none">
+        <div className="overflow-hidden w-full min-w-0 max-w-full select-none">
           <div className="flex w-max animate-marquee space-x-8 hover:[animation-play-state:paused]">
             {/* Double the list for seamless continuous infinite loop */}
             {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, idx) => (

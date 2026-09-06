@@ -4,7 +4,8 @@ import { PageRoute, ServiceCategory } from '../types';
 import { ServiceCard } from '../components/ServiceCard';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { ServiceIcon } from '../components/ServiceIcon';
-import { ArrowRight, Sparkles, MessageCircle, Phone, CheckCircle } from 'lucide-react';
+import { WhatsAppIcon } from '../components/WhatsAppIcon';
+import { ArrowRight, Sparkles, Phone, CheckCircle } from 'lucide-react';
 
 interface CategoryServicesPageProps {
   category: ServiceCategory;
@@ -65,7 +66,7 @@ export const CategoryServicesPage: React.FC<CategoryServicesPageProps> = ({
                 rel="noopener noreferrer"
                 className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition-all flex items-center justify-center gap-2"
               >
-                <MessageCircle className="w-4 h-4 fill-white" />
+                <WhatsAppIcon className="w-4 h-4 fill-white text-white" />
                 <span>WhatsApp Query</span>
               </a>
             </div>

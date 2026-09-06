@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { PageRoute } from '../types';
 import { Breadcrumbs } from '../components/Breadcrumbs';
+import { WhatsAppIcon } from '../components/WhatsAppIcon';
 import {
   FileText,
   MessageCircle,
@@ -259,20 +260,39 @@ export const HowItWorksPage: React.FC<HowItWorksPageProps> = ({ onNavigate, onOp
             <p className="text-xs sm:text-sm text-blue-100">
               Our consultants at Hari Vithal Complex, Pushpak Old Panvel are ready to assist.
             </p>
-            <div className="pt-2 flex items-center justify-center gap-3">
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-2.5">
+              <a
+                href="https://wa.me/917666040771?text=Hello%20Safehands%20Enterprises,%20I%20have%20questions%20about%20the%20application%20process."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs flex items-center gap-1.5 transition-all"
+                title="Chat on WhatsApp"
+              >
+                <WhatsAppIcon className="w-4 h-4 fill-white text-white" />
+                <span>WhatsApp 7666040771</span>
+              </a>
+              <a
+                href="tel:+917666040771"
+                className="px-3.5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center gap-1.5 transition-all"
+                title="Call 7666040771"
+              >
+                <Phone className="w-3.5 h-3.5" />
+                <span>7666040771</span>
+              </a>
+              <a
+                href="tel:+918097759771"
+                className="px-3.5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center gap-1.5 transition-all"
+                title="Call 8097759771"
+              >
+                <Phone className="w-3.5 h-3.5" />
+                <span>8097759771</span>
+              </a>
               <button
                 onClick={() => onOpenEnquiry()}
-                className="px-5 py-2.5 rounded-xl bg-white text-[#0f2b5c] hover:bg-slate-100 font-bold text-xs"
+                className="px-4 py-2.5 rounded-xl bg-white text-[#0f2b5c] hover:bg-slate-100 font-bold text-xs transition-all"
               >
                 Inquire With Our Team
               </button>
-              <a
-                href="tel:+917666040771"
-                className="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs flex items-center gap-1.5"
-              >
-                <Phone className="w-3.5 h-3.5" />
-                <span>Call 7666040771</span>
-              </a>
             </div>
           </div>
         </div>

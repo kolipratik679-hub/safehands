@@ -3,12 +3,12 @@ import { getServiceBySlug, ALL_SERVICES_DATA } from '../data/servicesData';
 import { PageRoute, ServiceCategory } from '../types';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { ServiceIcon } from '../components/ServiceIcon';
+import { WhatsAppIcon } from '../components/WhatsAppIcon';
 import {
   Clock,
   FileCheck,
   CheckCircle2,
   Sparkles,
-  MessageCircle,
   Phone,
   AlertCircle,
   ArrowRight,
@@ -264,17 +264,28 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
                     rel="noopener noreferrer"
                     className="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-sm transition-all flex items-center justify-center gap-2"
                   >
-                    <MessageCircle className="w-4 h-4 fill-white" />
+                    <WhatsAppIcon className="w-4 h-4 fill-white text-white" />
                     <span>Chat on WhatsApp: 7666040771</span>
                   </a>
 
-                  <a
-                    href="tel:+917666040771"
-                    className="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition-colors flex items-center justify-center gap-2"
-                  >
-                    <Phone className="w-3.5 h-3.5 text-blue-600" />
-                    <span>Call Our Desk: 7666040771</span>
-                  </a>
+                  <div className="grid grid-cols-2 gap-2">
+                    <a
+                      href="tel:+917666040771"
+                      className="py-2.5 px-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition-colors flex items-center justify-center gap-1.5 truncate"
+                      title="Call 7666040771"
+                    >
+                      <Phone className="w-3.5 h-3.5 text-blue-600 flex-shrink-0" />
+                      <span>7666040771</span>
+                    </a>
+                    <a
+                      href="tel:+918097759771"
+                      className="py-2.5 px-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition-colors flex items-center justify-center gap-1.5 truncate"
+                      title="Call 8097759771"
+                    >
+                      <Phone className="w-3.5 h-3.5 text-blue-600 flex-shrink-0" />
+                      <span>8097759771</span>
+                    </a>
+                  </div>
                 </div>
 
                 <div className="pt-3 border-t border-slate-100 text-xs text-slate-500 space-y-2">

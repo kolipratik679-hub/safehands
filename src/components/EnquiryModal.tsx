@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ALL_SERVICES_DATA } from '../data/servicesData';
-import { X, Send, CheckCircle2, MessageCircle, Phone, Sparkles, MapPin } from 'lucide-react';
+import { X, Send, CheckCircle2, Phone, Sparkles, MapPin } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 interface EnquiryModalProps {
   isOpen: boolean;
@@ -106,16 +107,27 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-bold shadow transition-all"
                 >
-                  <MessageCircle className="w-4 h-4" />
+                  <WhatsAppIcon className="w-4 h-4 fill-white text-white" />
                   <span>Send Details on WhatsApp</span>
                 </a>
-                <a
-                  href="tel:+917666040771"
-                  className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-white hover:bg-slate-100 text-slate-800 border border-slate-200 rounded-xl text-xs font-bold transition-all"
-                >
-                  <Phone className="w-3.5 h-3.5 text-blue-600" />
-                  <span>Call Us Directly: 7666040771</span>
-                </a>
+                <div className="grid grid-cols-2 gap-2">
+                  <a
+                    href="tel:+917666040771"
+                    className="flex items-center justify-center gap-1.5 py-2.5 px-2 bg-white hover:bg-slate-100 text-slate-800 border border-slate-200 rounded-xl text-xs font-bold transition-all truncate"
+                    title="Call 7666040771"
+                  >
+                    <Phone className="w-3.5 h-3.5 text-blue-600 flex-shrink-0" />
+                    <span>7666040771</span>
+                  </a>
+                  <a
+                    href="tel:+918097759771"
+                    className="flex items-center justify-center gap-1.5 py-2.5 px-2 bg-white hover:bg-slate-100 text-slate-800 border border-slate-200 rounded-xl text-xs font-bold transition-all truncate"
+                    title="Call 8097759771"
+                  >
+                    <Phone className="w-3.5 h-3.5 text-blue-600 flex-shrink-0" />
+                    <span>8097759771</span>
+                  </a>
+                </div>
               </div>
 
               <div className="pt-2 text-xs text-slate-400 flex items-center justify-center gap-1.5">

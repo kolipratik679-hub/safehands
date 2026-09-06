@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Logo } from './Logo';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import { CATEGORIES_DATA } from '../data/servicesData';
 import { PageRoute, ServiceCategory } from '../types';
 import {
   Phone,
-  MessageCircle,
   Clock,
   MapPin,
   ChevronDown,
@@ -50,41 +50,45 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-md shadow-slate-900/5 border-b border-slate-200/90'
-          : 'bg-white border-b border-slate-100'
-      }`}
-    >
-      {/* Top Utility Announcement Bar - Collapses smoothly on scroll for compact sticky state */}
-      <div
-        className={`bg-[#0f2b5c] text-white text-[12px] font-medium px-4 sm:px-6 transition-all duration-300 overflow-hidden ${
-          isScrolled ? 'max-h-0 py-0 opacity-0' : 'max-h-12 py-1.5 opacity-100'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1.5 sm:gap-4">
-          <div className="flex items-center gap-2 text-slate-200">
+    <header className="sticky top-0 z-50 w-full transition-shadow duration-200 shadow-sm">
+      {/* Top Utility Announcement Bar - Stays sticky with both call numbers */}
+      <div className="w-full bg-[#0f2b5c] text-white text-[11px] sm:text-xs font-medium py-1.5 px-3 sm:px-6 border-b border-blue-900/40">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
+          <div className="flex items-center gap-1.5 text-slate-200 min-w-0">
             <MapPin className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
-            <span className="truncate">
+            <span className="truncate text-[10.5px] sm:text-xs">
               Serving Panvel • Vadghar • Pushpak • Karanjade &amp; Nearby Areas
             </span>
           </div>
 
-          <div className="flex items-center gap-4 text-xs font-normal">
-            <div className="hidden md:flex items-center gap-1.5 text-slate-300">
+          <div className="flex items-center gap-2 sm:gap-3 text-xs flex-shrink-0">
+            <div className="hidden lg:flex items-center gap-1.5 text-slate-300 text-[11px]">
               <Clock className="w-3.5 h-3.5 text-emerald-400" />
               <span>Mon - Sat: 9:00 AM - 7:00 PM</span>
             </div>
 
-            <a
-              href="tel:+917666040771"
-              id="top-bar-call-link"
-              className="flex items-center gap-1.5 font-bold text-white hover:text-amber-300 transition-colors bg-white/10 hover:bg-white/20 px-2.5 py-0.5 rounded-full"
-            >
-              <Phone className="w-3 h-3 text-amber-400" />
-              <span>7666040771</span>
-            </a>
+            {/* Calling Options: Both numbers strictly callable */}
+            <div className="flex items-center gap-1.5 bg-white/10 hover:bg-white/15 px-2.5 py-0.5 rounded-full text-[10.5px] sm:text-xs text-white">
+              <Phone className="w-3 h-3 text-amber-400 flex-shrink-0" />
+              <span className="text-slate-300 hidden sm:inline">Call:</span>
+              <a
+                href="tel:+917666040771"
+                id="top-bar-call-link-1"
+                className="font-bold hover:text-amber-300 transition-colors"
+                title="Call Safehands 7666040771"
+              >
+                7666040771
+              </a>
+              <span className="text-blue-300 font-normal select-none">/</span>
+              <a
+                href="tel:+918097759771"
+                id="top-bar-call-link-2"
+                className="font-bold hover:text-amber-300 transition-colors"
+                title="Call Safehands 8097759771"
+              >
+                8097759771
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -92,15 +96,17 @@ export const Header: React.FC<HeaderProps> = ({
       {/* Main Navbar Bar */}
       <nav
         className={`w-full transition-all duration-200 ${
-          isScrolled ? 'py-2.5 sm:py-3' : 'py-3 sm:py-3.5'
+          isScrolled
+            ? 'bg-white/95 backdrop-blur-md shadow-md shadow-slate-900/5 border-b border-slate-200/90 py-2 sm:py-2.5'
+            : 'bg-white border-b border-slate-100 py-2.5 sm:py-3.5'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 flex items-center justify-between gap-2 sm:gap-4">
           {/* Brand Logo */}
           <button
             onClick={() => handleNavClick('home')}
             id="nav-logo-button"
-            className="text-left focus:outline-none transition-transform active:scale-95"
+            className="text-left focus:outline-none transition-transform active:scale-95 min-w-0 flex-shrink-1 sm:flex-shrink-0"
             aria-label="Safehands Enterprises Home"
           >
             <Logo variant="full" />
@@ -261,17 +267,17 @@ export const Header: React.FC<HeaderProps> = ({
               id="nav-whatsapp-cta"
               className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-colors"
             >
-              <MessageCircle className="w-4 h-4 text-emerald-600 fill-emerald-600" />
+              <WhatsAppIcon className="w-4 h-4 text-emerald-600 fill-emerald-600" />
               <span>WhatsApp</span>
             </a>
 
-            {/* Primary Consultation CTA Button */}
+            {/* Primary Consultation CTA Button - visible on tablet & desktop */}
             <button
               onClick={() => onOpenEnquiry()}
               id="nav-get-assistance-cta"
-              className="flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-bold text-white bg-[#0f2b5c] hover:bg-blue-900 shadow-sm hover:shadow transition-all active:scale-95"
+              className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-bold text-white bg-[#0f2b5c] hover:bg-blue-900 shadow-sm transition-all active:scale-95 flex-shrink-0"
             >
-              <Sparkles className="w-4 h-4 text-amber-300" />
+              <Sparkles className="w-3.5 h-3.5 text-amber-300" />
               <span>Get Assistance</span>
             </button>
 
@@ -279,7 +285,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               id="nav-mobile-menu-toggle"
-              className="lg:hidden p-2 text-slate-700 hover:bg-slate-100 rounded-lg focus:outline-none"
+              className="lg:hidden p-2 text-slate-700 hover:bg-slate-100 rounded-lg focus:outline-none flex-shrink-0"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -289,7 +295,19 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-white border-b border-slate-200 px-4 py-4 space-y-3 shadow-xl max-h-[85vh] overflow-y-auto">
+          <div className="lg:hidden bg-white border-t border-slate-100 px-4 py-4 space-y-3 shadow-xl max-h-[85vh] overflow-y-auto">
+            {/* Direct Instant Action for Mobile */}
+            <button
+              onClick={() => {
+                onOpenEnquiry();
+                setMobileMenuOpen(false);
+              }}
+              className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-[#0f2b5c] hover:bg-blue-900 text-white rounded-xl text-sm font-bold shadow-md transition-colors"
+            >
+              <Sparkles className="w-4 h-4 text-amber-300" />
+              <span>Get Service Assistance</span>
+            </button>
+
             <div className="space-y-1 font-semibold text-slate-800">
               <button
                 onClick={() => handleNavClick('home')}
@@ -375,23 +393,35 @@ export const Header: React.FC<HeaderProps> = ({
               </button>
             </div>
 
-            {/* Mobile Contact Shortcuts */}
-            <div className="pt-3 border-t border-slate-200 grid grid-cols-2 gap-2">
-              <a
-                href="tel:+917666040771"
-                className="flex items-center justify-center gap-2 py-2.5 px-3 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs font-bold text-slate-800"
-              >
-                <Phone className="w-3.5 h-3.5 text-blue-600" />
-                <span>Call 7666040771</span>
-              </a>
+            {/* Mobile Contact Shortcuts: Both numbers callable + WhatsApp */}
+            <div className="pt-3 border-t border-slate-200 space-y-2">
+              <div className="grid grid-cols-2 gap-2">
+                <a
+                  href="tel:+917666040771"
+                  className="flex items-center justify-center gap-1.5 py-2.5 px-2 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs font-bold text-slate-800"
+                  title="Call 7666040771"
+                >
+                  <Phone className="w-3.5 h-3.5 text-blue-600 flex-shrink-0" />
+                  <span className="truncate">7666040771</span>
+                </a>
+                <a
+                  href="tel:+918097759771"
+                  className="flex items-center justify-center gap-1.5 py-2.5 px-2 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs font-bold text-slate-800"
+                  title="Call 8097759771"
+                >
+                  <Phone className="w-3.5 h-3.5 text-blue-600 flex-shrink-0" />
+                  <span className="truncate">8097759771</span>
+                </a>
+              </div>
               <a
                 href="https://wa.me/917666040771?text=Hello%20Safehands%20Enterprises"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 py-2.5 px-3 bg-emerald-50 hover:bg-emerald-100 rounded-lg text-xs font-bold text-emerald-800 border border-emerald-200"
+                className="w-full flex items-center justify-center gap-2 py-2.5 px-3 bg-emerald-50 hover:bg-emerald-100 rounded-lg text-xs font-bold text-emerald-800 border border-emerald-200"
+                title="Chat on WhatsApp"
               >
-                <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
-                <span>WhatsApp</span>
+                <WhatsAppIcon className="w-4 h-4 text-emerald-600 fill-emerald-600" />
+                <span>WhatsApp: 7666040771</span>
               </a>
             </div>
           </div>

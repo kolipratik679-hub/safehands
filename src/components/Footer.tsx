@@ -2,9 +2,9 @@ import React from 'react';
 import { Logo } from './Logo';
 import { PageRoute, ServiceCategory } from '../types';
 import { CATEGORIES_DATA } from '../data/servicesData';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import {
   Phone,
-  MessageCircle,
   Mail,
   MapPin,
   Clock,
@@ -43,16 +43,26 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenEnquiry }) => 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 text-xs font-semibold transition-colors"
+                title="Chat on WhatsApp"
               >
-                <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
+                <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-400 fill-emerald-400" />
                 <span>WhatsApp Us</span>
               </a>
               <a
                 href="tel:+917666040771"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 border border-blue-500/30 text-xs font-semibold transition-colors"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 border border-blue-500/30 text-xs font-semibold transition-colors"
+                title="Call 7666040771"
               >
                 <Phone className="w-3.5 h-3.5 text-blue-400" />
-                <span>Call 7666040771</span>
+                <span>7666040771</span>
+              </a>
+              <a
+                href="tel:+918097759771"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 border border-blue-500/30 text-xs font-semibold transition-colors"
+                title="Call 8097759771"
+              >
+                <Phone className="w-3.5 h-3.5 text-blue-400" />
+                <span>8097759771</span>
               </a>
             </div>
 
@@ -163,24 +173,36 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenEnquiry }) => 
               </div>
 
               <div className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                <a
-                  href="tel:+917666040771"
-                  className="text-xs hover:text-white transition-colors font-medium"
-                >
-                  +91 76660 40771
-                </a>
+                <Phone className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                <div className="text-xs text-slate-300">
+                  <a
+                    href="tel:+917666040771"
+                    className="hover:text-white transition-colors font-medium mr-2"
+                    title="Call 7666040771"
+                  >
+                    +91 76660 40771
+                  </a>
+                  <span>/</span>
+                  <a
+                    href="tel:+918097759771"
+                    className="hover:text-white transition-colors font-medium ml-2"
+                    title="Call 8097759771"
+                  >
+                    +91 80977 59771
+                  </a>
+                </div>
               </div>
 
               <div className="flex items-center gap-2.5">
-                <MessageCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                <WhatsAppIcon className="w-4 h-4 text-emerald-400 fill-emerald-400 flex-shrink-0" />
                 <a
                   href="https://wa.me/917666040771"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs hover:text-white transition-colors font-medium"
+                  title="Chat on WhatsApp"
                 >
-                  Chat on WhatsApp: 7666040771
+                  WhatsApp: 7666040771
                 </a>
               </div>
 

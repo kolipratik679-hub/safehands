@@ -2,7 +2,8 @@ import React, { useState, useMemo } from 'react';
 import { FAQS_DATA } from '../data/faqsData';
 import { PageRoute } from '../types';
 import { Breadcrumbs } from '../components/Breadcrumbs';
-import { ChevronDown, Search, HelpCircle, MessageCircle, Phone, Sparkles } from 'lucide-react';
+import { WhatsAppIcon } from '../components/WhatsAppIcon';
+import { ChevronDown, Search, HelpCircle, Phone, Sparkles } from 'lucide-react';
 
 interface FaqPageProps {
   onNavigate: (route: PageRoute) => void;
@@ -162,7 +163,7 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate, onOpenEnquiry }) =
                 rel="noopener noreferrer"
                 className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all flex items-center gap-1.5"
               >
-                <MessageCircle className="w-3.5 h-3.5" />
+                <WhatsAppIcon className="w-3.5 h-3.5 fill-white text-white" />
                 <span>Ask on WhatsApp</span>
               </a>
 

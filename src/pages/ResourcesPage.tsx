@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { RESOURCES_DATA } from '../data/resourcesData';
 import { PageRoute, ResourceArticle } from '../types';
 import { Breadcrumbs } from '../components/Breadcrumbs';
+import { WhatsAppIcon } from '../components/WhatsAppIcon';
 import {
   BookOpen,
   Clock,
@@ -10,7 +11,6 @@ import {
   ArrowRight,
   Sparkles,
   Share2,
-  MessageCircle,
   Phone,
 } from 'lucide-react';
 
@@ -142,9 +142,11 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
                     href={`https://wa.me/917666040771?text=${encodeURIComponent(`Hello Safehands, I read your guide on "${currentArticle.title}" and would like assistance.`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all"
+                    className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all flex items-center gap-1.5"
+                    title="Chat on WhatsApp"
                   >
-                    WhatsApp Query
+                    <WhatsAppIcon className="w-3.5 h-3.5 fill-white text-white" />
+                    <span>WhatsApp Query</span>
                   </a>
                 </div>
               </div>
