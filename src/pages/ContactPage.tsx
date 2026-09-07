@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { PageRoute } from '../types';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { ALL_SERVICES_DATA } from '../data/servicesData';
+import { useData } from '../context/DataContext';
 import { WhatsAppIcon } from '../components/WhatsAppIcon';
 import {
   MapPin,
@@ -20,6 +21,7 @@ interface ContactPageProps {
 }
 
 export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
+  const { contactDetails, services, submitLead } = useData();
   const [name, setName] = useState('');
   const [mobile, setMobile] = useState('');
   const [service, setService] = useState('General Consultation');
@@ -27,8 +29,16 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
   const [message, setMessage] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const primaryPhone = contactDetails?.primaryPhone || '+91 76660 40771';
+  const secondaryPhone = contactDetails?.secondaryPhone || '+91 80977 59771';
+  const whatsappNum = contactDetails?.whatsappNumber || '+91 76660 40771';
+  const emailAddr = contactDetails?.email || 'safehands0977@gmail.com';
+  const cleanWhatsApp = whatsappNum.replace(/\D/g, '');
+  const cleanIntl = cleanWhatsApp.length === 10 ? `91${cleanWhatsApp}` : cleanWhatsApp;
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim()) {
       setError('Please enter your full name.');
@@ -40,10 +50,28 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
       return;
     }
     setError('');
-    setIsSubmitted(true);
+    setIsSubmitting(true);
+
+    try {
+      await submitLead({
+        name: name.trim(),
+        phone: mobile.trim(),
+        service,
+        locality: locality.trim(),
+        message: message.trim(),
+        source: 'contact_page'
+      });
+      setIsSubmitted(true);
+    } catch (err) {
+      console.error('Failed to submit contact page lead', err);
+      // Still show success since it is locally submitted
+      setIsSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const whatsappUrl = `https://wa.me/917666040771?text=${encodeURIComponent(
+  const whatsappUrl = `https://wa.me/${cleanIntl}?text=${encodeURIComponent(
     `Hello Safehands Enterprises,\nName: ${name}\nMobile: ${mobile}\nLocality: ${locality}\nService: ${service}\nMessage: ${message || 'I would like to inquire about required documents and process.'}`
   )}`;
 
@@ -88,7 +116,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                 </div>
 
                 <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 text-xs text-slate-700 leading-relaxed font-medium">
-                  Shop No. 4, Plot No. 284, Hari Vithal Complex, Sector R3, Pushpak Old Panvel, Vadghar, Raigad - 410220
+                  {contactDetails ? `${contactDetails.addressLine1}, ${contactDetails.addressLine2}, ${contactDetails.city} - ${contactDetails.pincode}` : 'Shop No. 4, Plot No. 284, Hari Vithal Complex, Sector R3, Pushpak Old Panvel, Vadghar, Raigad - 410220'}
                 </div>
 
                 <div className="pt-2 text-xs text-slate-500 space-y-1">
@@ -100,37 +128,37 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
               {/* Direct Reach Out Cards: Dual Phone Lines + WhatsApp */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <a
-                  href="tel:+917666040771"
+                  href={`tel:${primaryPhone}`}
                   className="p-3.5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:shadow-sm transition-all group"
-                  title="Call 7666040771"
+                  title={`Call ${primaryPhone}`}
                 >
                   <div className="flex items-center gap-1.5 text-xs text-slate-500 mb-1">
                     <Phone className="w-3.5 h-3.5 text-blue-600" />
                     <span>Call Line 1</span>
                   </div>
                   <div className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-blue-700">
-                    7666040771
+                    {primaryPhone}
                   </div>
                   <div className="text-[10px] text-slate-400 mt-0.5">Direct Desk</div>
                 </a>
 
                 <a
-                  href="tel:+918097759771"
+                  href={`tel:${secondaryPhone}`}
                   className="p-3.5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 hover:shadow-sm transition-all group"
-                  title="Call 8097759771"
+                  title={`Call ${secondaryPhone}`}
                 >
                   <div className="flex items-center gap-1.5 text-xs text-slate-500 mb-1">
                     <Phone className="w-3.5 h-3.5 text-blue-600" />
                     <span>Call Line 2</span>
                   </div>
                   <div className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-blue-700">
-                    8097759771
+                    {secondaryPhone}
                   </div>
                   <div className="text-[10px] text-slate-400 mt-0.5">Support Desk</div>
                 </a>
 
                 <a
-                  href="https://wa.me/917666040771?text=Hello%20Safehands%20Enterprises"
+                  href={`https://wa.me/${cleanIntl}?text=Hello%20Safehands%20Enterprises`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-3.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-400 hover:shadow-sm transition-all group"
@@ -141,7 +169,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     <span>WhatsApp</span>
                   </div>
                   <div className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-emerald-700">
-                    7666040771
+                    {whatsappNum}
                   </div>
                   <div className="text-[10px] text-slate-400 mt-0.5">Instant Chat</div>
                 </a>
@@ -152,15 +180,15 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                 <div className="flex items-center gap-3">
                   <Mail className="w-4 h-4 text-blue-600 flex-shrink-0" />
                   <a
-                    href="mailto:safehandsenterprises2024@gmail.com"
+                    href={`mailto:${emailAddr}`}
                     className="font-semibold text-slate-800 hover:text-blue-700"
                   >
-                    safehandsenterprises2024@gmail.com
+                    {emailAddr}
                   </a>
                 </div>
                 <div className="flex items-center gap-3">
                   <Clock className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                  <span>Monday - Saturday: 9:00 AM - 7:00 PM</span>
+                  <span>{contactDetails?.businessHours || 'Monday - Saturday: 9:00 AM - 7:00 PM'}</span>
                 </div>
               </div>
             </div>

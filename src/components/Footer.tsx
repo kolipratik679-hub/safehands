@@ -2,6 +2,7 @@ import React from 'react';
 import { Logo } from './Logo';
 import { PageRoute, ServiceCategory } from '../types';
 import { CATEGORIES_DATA } from '../data/servicesData';
+import { useData } from '../context/DataContext';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import {
   Phone,
@@ -11,6 +12,7 @@ import {
   ShieldAlert,
   ArrowUpRight,
   Heart,
+  Lock
 } from 'lucide-react';
 
 interface FooterProps {
@@ -19,6 +21,14 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenEnquiry }) => {
+  const { contactDetails } = useData();
+  const primaryPhone = contactDetails?.primaryPhone || '+91 76660 40771';
+  const secondaryPhone = contactDetails?.secondaryPhone || '+91 80977 59771';
+  const whatsappNum = contactDetails?.whatsappNumber || '+91 76660 40771';
+  const emailAddr = contactDetails?.email || 'safehands0977@gmail.com';
+  const cleanWhatsApp = whatsappNum.replace(/\D/g, '');
+  const cleanIntl = cleanWhatsApp.length === 10 ? `91${cleanWhatsApp}` : cleanWhatsApp;
+
   return (
     <footer className="bg-[#0b1d3d] text-slate-300 pt-14 pb-8 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -39,7 +49,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenEnquiry }) => 
 
             <div className="pt-2 flex flex-wrap gap-2">
               <a
-                href="https://wa.me/917666040771?text=Hello%20Safehands%20Enterprises"
+                href={`https://wa.me/${cleanIntl}?text=Hello%20Safehands%20Enterprises`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 text-xs font-semibold transition-colors"
@@ -49,26 +59,26 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenEnquiry }) => 
                 <span>WhatsApp Us</span>
               </a>
               <a
-                href="tel:+917666040771"
+                href={`tel:${primaryPhone}`}
                 className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 border border-blue-500/30 text-xs font-semibold transition-colors"
-                title="Call 7666040771"
+                title={`Call ${primaryPhone}`}
               >
                 <Phone className="w-3.5 h-3.5 text-blue-400" />
-                <span>7666040771</span>
+                <span>{primaryPhone}</span>
               </a>
               <a
-                href="tel:+918097759771"
+                href={`tel:${secondaryPhone}`}
                 className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 border border-blue-500/30 text-xs font-semibold transition-colors"
-                title="Call 8097759771"
+                title={`Call ${secondaryPhone}`}
               >
                 <Phone className="w-3.5 h-3.5 text-blue-400" />
-                <span>8097759771</span>
+                <span>{secondaryPhone}</span>
               </a>
             </div>
 
             <div className="pt-2 text-xs text-slate-400 flex items-center gap-2">
               <Clock className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
-              <span>Monday - Saturday: 9:00 AM - 7:00 PM</span>
+              <span>{contactDetails?.businessHours || 'Monday - Saturday: 9:00 AM - 7:00 PM'}</span>
             </div>
           </div>
 
@@ -176,19 +186,19 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenEnquiry }) => 
                 <Phone className="w-4 h-4 text-blue-400 flex-shrink-0" />
                 <div className="text-xs text-slate-300">
                   <a
-                    href="tel:+917666040771"
+                    href={`tel:${primaryPhone}`}
                     className="hover:text-white transition-colors font-medium mr-2"
-                    title="Call 7666040771"
+                    title={`Call ${primaryPhone}`}
                   >
-                    +91 76660 40771
+                    {primaryPhone}
                   </a>
                   <span>/</span>
                   <a
-                    href="tel:+918097759771"
+                    href={`tel:${secondaryPhone}`}
                     className="hover:text-white transition-colors font-medium ml-2"
-                    title="Call 8097759771"
+                    title={`Call ${secondaryPhone}`}
                   >
-                    +91 80977 59771
+                    {secondaryPhone}
                   </a>
                 </div>
               </div>
@@ -196,23 +206,23 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenEnquiry }) => 
               <div className="flex items-center gap-2.5">
                 <WhatsAppIcon className="w-4 h-4 text-emerald-400 fill-emerald-400 flex-shrink-0" />
                 <a
-                  href="https://wa.me/917666040771"
+                  href={`https://wa.me/${cleanIntl}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs hover:text-white transition-colors font-medium"
                   title="Chat on WhatsApp"
                 >
-                  WhatsApp: 7666040771
+                  WhatsApp: {whatsappNum}
                 </a>
               </div>
 
               <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-blue-400 flex-shrink-0" />
                 <a
-                  href="mailto:safehandsenterprises@gmail.com"
+                  href={`mailto:${emailAddr}`}
                   className="text-xs hover:text-white transition-colors truncate"
                 >
-                  safehandsenterprises@gmail.com
+                  {emailAddr}
                 </a>
               </div>
 
@@ -244,6 +254,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenEnquiry }) => 
           </div>
           <div className="flex items-center gap-4 text-slate-400">
             <span>Panvel • Vadghar • Pushpak • Karanjade</span>
+            <span>•</span>
+            <button
+              onClick={() => onNavigate('admin')}
+              className="text-slate-400 hover:text-slate-200 transition text-xs flex items-center gap-1 cursor-pointer"
+            >
+              <Lock className="w-3 h-3 text-slate-400" />
+              <span>Staff Login</span>
+            </button>
           </div>
         </div>
       </div>

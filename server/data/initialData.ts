@@ -1,0 +1,982 @@
+// Safehands Initial Database Seed Data (Source of Truth)
+export interface ServiceDbRow {
+  id: string;
+  slug: string;
+  name: string;
+  category: string;
+  category_name: string;
+  icon_name: string;
+  short_description: string;
+  full_description: string;
+  turnaround_time: string;
+  popular: number;
+  is_active: number;
+  who_needs_this: string;
+  important_notes: string;
+  required_documents: string[];
+  process_steps: string[];
+  related_service_slugs: string[];
+  display_order: number;
+}
+
+export const INITIAL_ADMIN_USER = {
+  id: 1,
+  email: 'safehands@gmail.com',
+  password_hash: '$2b$10$JRWmMqt172qL/6qel2vDeuO9e/yipA.gmL1IwyCZWQvEYjO5/eAN2',
+  role: 'admin'
+};
+
+export const INITIAL_CONTACT_DETAILS = {
+  "id": 1,
+  "primary_phone": "+91 76660 40771",
+  "secondary_phone": "+91 80977 59771",
+  "whatsapp_number": "+91 76660 40771",
+  "email": "safehands0977@gmail.com",
+  "address_line1": "Shop No. 4, Plot No. 284, Hari Vithal Complex",
+  "address_line2": "Sector R3, Pushpak Old Panvel, Vadghar",
+  "city": "Panvel",
+  "district": "Raigad",
+  "state": "Maharashtra",
+  "pincode": "410220",
+  "business_hours": "Monday - Saturday: 9:00 AM - 7:00 PM | Sunday: Closed (WhatsApp queries attended)",
+  "google_map_embed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3772.637731766861!2d73.1162!3d18.9926!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDU5JzMzLjQiTiA3M8KwMDYnNTguMyJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin",
+  "google_map_url": "https://maps.google.com/?q=Hari+Vithal+Complex+Pushpak+Old+Panvel+Vadghar+Raigad+410220"
+};
+
+export const INITIAL_TESTIMONIALS = [
+  {
+    "id": "exp-1",
+    "client_name": "Rahul M.",
+    "locality": "Old Panvel",
+    "service_used": "GST Registration & Udyam Filing",
+    "comment": "Very professional and helpful team. Got my GST registration and Udyam certificate done smoothly without having to run around multiple offices.",
+    "rating": 5,
+    "date_display": "August 2026",
+    "is_published": 1,
+    "display_order": 1
+  },
+  {
+    "id": "exp-2",
+    "client_name": "Pooja S.",
+    "locality": "Pushpak Nagar",
+    "service_used": "Passport Application Assistance",
+    "comment": "They guided me properly for my passport application and helped organize all original school records for the PSK appointment. Excellent guidance!",
+    "rating": 5,
+    "date_display": "July 2026",
+    "is_published": 1,
+    "display_order": 2
+  },
+  {
+    "id": "exp-3",
+    "client_name": "Amit K.",
+    "locality": "Karanjade",
+    "service_used": "Domicile Certificate & ITR Filing",
+    "comment": "Quick response on WhatsApp and the documentation check was thorough. Helped me file my ITR on time and get my domicile certificate sorted.",
+    "rating": 5,
+    "date_display": "August 2026",
+    "is_published": 1,
+    "display_order": 3
+  },
+  {
+    "id": "exp-4",
+    "client_name": "Sunil Patil",
+    "locality": "Vadghar",
+    "service_used": "Home Loan Documentation Support",
+    "comment": "Safehands prepared my complete loan file and coordinated with the bank officer. Having clean paperwork made the sanction process much smoother.",
+    "rating": 5,
+    "date_display": "June 2026",
+    "is_published": 1,
+    "display_order": 4
+  }
+];
+
+export const INITIAL_REVIEWS = [
+  {
+    "id": "rev-1",
+    "author_name": "Kiran Deshmukh",
+    "platform": "Google",
+    "rating": 5,
+    "review_text": "Excellent service for shop establishment licence and Udyam registration. Transparent guidance with no hidden charges. Highly recommended for business documentation in Panvel.",
+    "date_display": "July 2026",
+    "verified": 1,
+    "is_published": 1
+  },
+  {
+    "id": "rev-2",
+    "author_name": "Ramesh Gharat",
+    "platform": "Google",
+    "rating": 5,
+    "review_text": "Visited their Hari Vithal Complex office in Panvel for my income certificate. The team explained the procedure clearly and verified every document before portal submission.",
+    "date_display": "August 2026",
+    "verified": 1,
+    "is_published": 1
+  },
+  {
+    "id": "rev-3",
+    "author_name": "Pravin Gaikwad",
+    "platform": "Google",
+    "rating": 5,
+    "review_text": "Helped us organize paperwork for a personal loan without unnecessary delays. Staff is polite, responsive on WhatsApp, and understands bank requirements thoroughly.",
+    "date_display": "August 2026",
+    "verified": 1,
+    "is_published": 1
+  },
+  {
+    "id": "rev-4",
+    "author_name": "Sneha Joshi",
+    "platform": "Google",
+    "rating": 5,
+    "review_text": "Best documentation consultation in Pushpak Old Panvel area. They reviewed my Aadhaar and PAN documents properly before submission so nothing got rejected.",
+    "date_display": "September 2026",
+    "verified": 1,
+    "is_published": 1
+  }
+];
+
+export const INITIAL_LEADS = [
+  {
+    "id": 1,
+    "name": "Vikram Shinde",
+    "phone": "+91 98201 45678",
+    "email": "vikram.shinde@example.com",
+    "service": "GST Registration & Udyam Filing",
+    "locality": "Khanda Colony, Panvel",
+    "message": "Need GST registration for a new retail hardware store starting next month.",
+    "status": "new",
+    "admin_notes": "Urgent filing requested before 15th.",
+    "source": "website_contact",
+    "created_at": "2026-09-06T20:24:05.593Z"
+  },
+  {
+    "id": 2,
+    "name": "Anjali Patil",
+    "phone": "+91 97654 32109",
+    "email": "anjali.patil@example.com",
+    "service": "Income Certificate",
+    "locality": "Pushpak Nagar, Old Panvel",
+    "message": "Need income certificate for engineering scholarship application deadline.",
+    "status": "contacted",
+    "admin_notes": "Ration card and salary certificate verified on WhatsApp.",
+    "source": "enquiry_modal",
+    "created_at": "2026-09-05T22:24:05.593Z"
+  }
+];
+
+export const INITIAL_SERVICES: ServiceDbRow[] = [
+  {
+    "id": "gst-registration-filing",
+    "slug": "gst-registration-filing",
+    "name": "GST Registration & Filing",
+    "category": "business-tax",
+    "category_name": "Business & Tax Services",
+    "icon_name": "FileSpreadsheet",
+    "short_description": "Fresh GST registration for proprietors, partnerships, and companies, plus regular monthly and quarterly return filing (GSTR-1, GSTR-3B).",
+    "full_description": "Comprehensive guidance for obtaining a new Goods and Services Tax Identification Number (GSTIN) and keeping your business compliant with periodic returns. We assist small business owners, traders, and service providers across Panvel and Raigad with document compilation, portal submission, and regular filing.",
+    "turnaround_time": "3 - 7 Working Days (Registration)",
+    "popular": 1,
+    "is_active": 1,
+    "who_needs_this": "Traders, manufacturers, e-commerce sellers, contractors, and service providers exceeding GST thresholds or requiring voluntary registration for business tenders.",
+    "important_notes": "Timely filing of GSTR-1 and GSTR-3B prevents late fees and interest penalties.",
+    "required_documents": [
+      "PAN Card of Proprietor / Partners / Company",
+      "Aadhaar Card of all primary applicants",
+      "Electricity Bill / Rent Agreement of business premises",
+      "NOC from Property Owner (if rented)",
+      "Cancelled Cheque or Bank Statement showing business account details",
+      "Passport size photograph of the applicant"
+    ],
+    "process_steps": [
+      "Document collection & preliminary verification",
+      "Form preparation on GST Portal",
+      "Aadhaar biometric / OTP verification",
+      "ARN generation and application monitoring",
+      "GSTIN Certificate handover & setup for periodic filing"
+    ],
+    "related_service_slugs": [
+      "msme-udyam-registration",
+      "itr-filing",
+      "business-registration"
+    ],
+    "display_order": 1
+  },
+  {
+    "id": "itr-filing",
+    "slug": "itr-filing",
+    "name": "Income Tax Return (ITR) Filing",
+    "category": "business-tax",
+    "category_name": "Business & Tax Services",
+    "icon_name": "ReceiptText",
+    "short_description": "Professional assistance for filing salaried (ITR-1/2), business (ITR-3/4), and capital gains returns with tax computation.",
+    "full_description": "Accurate and timely filing of your annual Income Tax Returns. Whether you are a salaried employee in Panvel, a shop owner in Pushpak, or a freelancer, we calculate your income, claim applicable deductions, verify Form 26AS and AIS/TIS, and complete e-verification smoothly.",
+    "turnaround_time": "1 - 2 Working Days",
+    "popular": 1,
+    "is_active": 1,
+    "who_needs_this": "Salaried employees, business owners, professionals, landlords, and individuals needing clean ITR acknowledgement receipts for bank loans or visa processing.",
+    "important_notes": "Having 3 consecutive years of ITR returns is essential for home, vehicle, and business loan applications.",
+    "required_documents": [
+      "PAN Card and Aadhaar Card",
+      "Form 16 (for salaried individuals)",
+      "Bank Account Statements for the full financial year",
+      "Details of savings/investments (PPF, LIC, ELSS, Health Insurance)",
+      "Home Loan Interest Certificate (if applicable)"
+    ],
+    "process_steps": [
+      "Collection of Form 16 / Bank Statements",
+      "Download and reconciliation of AIS, TIS & 26AS",
+      "Draft tax calculation and deduction optimization",
+      "E-filing on the Income Tax Department portal",
+      "ITR-V verification assistance and receipt copy delivery"
+    ],
+    "related_service_slugs": [
+      "gst-registration-filing",
+      "home-loan-assistance",
+      "personal-loan-assistance"
+    ],
+    "display_order": 2
+  },
+  {
+    "id": "msme-udyam-registration",
+    "slug": "msme-udyam-registration",
+    "name": "MSME Udyam Registration",
+    "category": "business-tax",
+    "category_name": "Business & Tax Services",
+    "icon_name": "Building",
+    "short_description": "Official government Udyam registration certificate for micro, small, and medium enterprises to access priority credit and subsidies.",
+    "full_description": "Obtain your official Udyam Registration Certificate issued by the Ministry of MSME. This single certificate unlocks priority bank lending, lower interest rates on enterprise loans, government tender advantages, and protection against delayed buyer payments.",
+    "turnaround_time": "1 - 2 Working Days",
+    "popular": 1,
+    "is_active": 1,
+    "who_needs_this": "Retail shop owners, service agencies, small manufacturers, transport operators, and sole proprietors wanting recognized MSME status.",
+    "important_notes": "Udyam registration is a lifetime registration and has zero government renewal fees.",
+    "required_documents": [
+      "Aadhaar Card of the Proprietor / Director (must be linked with mobile)",
+      "PAN Card of Business / Proprietor",
+      "Business bank account number and IFSC code",
+      "Business Commencement Date & activity details (NIC code)",
+      "Total turnover and plant/equipment investment estimate"
+    ],
+    "process_steps": [
+      "Verification of Aadhaar and linked mobile for OTP",
+      "Appropriate NIC classification of business operations",
+      "Submission on the official Udyam portal",
+      "Verification by MSME department",
+      "Direct generation and printout of Udyam Certificate with QR code"
+    ],
+    "related_service_slugs": [
+      "business-registration",
+      "gst-registration-filing",
+      "business-loan-assistance"
+    ],
+    "display_order": 3
+  },
+  {
+    "id": "business-registration",
+    "slug": "business-registration",
+    "name": "Business Registration & Shop Act",
+    "category": "business-tax",
+    "category_name": "Business & Tax Services",
+    "icon_name": "Store",
+    "short_description": "Documentation and filing for Maharashtra Shop & Establishment Intimation (Gumasta), Partnership deed coordination, and Proprietorship setup.",
+    "full_description": "Starting a shop, office, or commercial venture in Panvel or Navi Mumbai requires formal municipal and state registration. We facilitate the entire Maharashtra Aaple Sarkar Shop Act Intimation / Gumasta licence process and draft partnership deeds for opening current accounts.",
+    "turnaround_time": "2 - 4 Working Days",
+    "popular": 0,
+    "is_active": 1,
+    "who_needs_this": "Any new retail shop, commercial office, cafe, warehouse, or enterprise opening in Panvel Municipal Corporation (PMC) or CIDCO limits.",
+    "important_notes": "Banks require the Shop Act / Gumasta registration to open a current bank account.",
+    "required_documents": [
+      "Aadhaar Card and PAN Card of employer/owner",
+      "Electricity bill of the shop/office premises",
+      "Rent Agreement & Owner NOC (if rented)",
+      "Photo of the establishment with Marathi nameboard",
+      "Partnership deed & partner details (if partnership firm)"
+    ],
+    "process_steps": [
+      "Establishment photo and premise paperwork check",
+      "Drafting employer details and employee count",
+      "Portal submission on Maharashtra Aaple Sarkar platform",
+      "Government fee processing",
+      "Issuance of formal Shop Act receipt / licence copy"
+    ],
+    "related_service_slugs": [
+      "food-licence",
+      "msme-udyam-registration",
+      "gst-registration-filing"
+    ],
+    "display_order": 4
+  },
+  {
+    "id": "pan-card-services",
+    "slug": "pan-card-services",
+    "name": "PAN Card Services",
+    "category": "government",
+    "category_name": "Government Services",
+    "icon_name": "CreditCard",
+    "short_description": "Application assistance for New PAN Card, Corrections in name/DOB/father name, Minor to Major updates, and lost card reprints.",
+    "full_description": "A Permanent Account Number (PAN) is vital for banking, taxes, and government KYC. We assist with fresh PAN card applications, updating outdated demographic records (corrections in spelling, parent name, date of birth), linking Aadhaar to PAN, and processing instant e-PANs.",
+    "turnaround_time": "Instant e-PAN / 10 - 15 Days Physical",
+    "popular": 1,
+    "is_active": 1,
+    "who_needs_this": "Students turning 18, citizens opening bank accounts, individuals whose old PAN details do not match their Aadhaar.",
+    "important_notes": "Ensure your name and date of birth in Aadhaar match your school leaving certificate before applying for corrections.",
+    "required_documents": [
+      "Aadhaar Card (with accurate date of birth and mobile link)",
+      "Proof of identity and address (if not using Aadhaar e-KYC)",
+      "Passport size photographs (2 copies)",
+      "Copy of existing PAN (in case of correction or reprint)"
+    ],
+    "process_steps": [
+      "Selection of New vs. Correction Form 49A/49AA",
+      "Demographic matching with Aadhaar database",
+      "Online application submission via NSDL / UTIITSL",
+      "Biometric / OTP e-sign completion",
+      "Immediate acknowledgement slip generation and physical card tracking"
+    ],
+    "related_service_slugs": [
+      "aadhaar-update-assistance",
+      "itr-filing",
+      "personal-loan-assistance"
+    ],
+    "display_order": 5
+  },
+  {
+    "id": "aadhaar-update-assistance",
+    "slug": "aadhaar-update-assistance",
+    "name": "Aadhaar Update Assistance",
+    "category": "government",
+    "category_name": "Government Services",
+    "icon_name": "Fingerprint",
+    "short_description": "Guidance and document verification for updating residential address, mobile number linkage, name corrections, and appointment scheduling.",
+    "full_description": "Keeping your Aadhaar card up-to-date is non-negotiable for bank KYC, government welfare schemes, and registrations. We help you assemble valid supporting documents (electricity bill, domicile, rent agreement) for address changes, book official Aadhaar Seva Kendra appointments, and track update requests (URN).",
+    "turnaround_time": "5 - 15 Working Days (UIDAI)",
+    "popular": 1,
+    "is_active": 1,
+    "who_needs_this": "Residents relocating to new homes in Panvel/Pushpak, individuals needing mobile number or email updates for OTP verification.",
+    "important_notes": "Safehands provides administrative preparation & appointment coordination. Physical biometric capture occurs at authorized UIDAI Aadhaar centres.",
+    "required_documents": [
+      "Current Aadhaar Number",
+      "Valid Proof of Address (POA) - Electricity bill, bank passbook with photo, or registered rent agreement",
+      "Proof of Identity (POI) for name corrections - Voter ID, Passport, PAN Card",
+      "Active mobile phone to receive verification OTP"
+    ],
+    "process_steps": [
+      "Document suitability screening against UIDAI approved lists",
+      "Online address update submission or official Aadhaar Kendra appointment booking",
+      "URN (Update Request Number) tracking support",
+      "Download and color PVC card printing once approved"
+    ],
+    "related_service_slugs": [
+      "pan-card-services",
+      "domicile-certificate",
+      "income-certificate"
+    ],
+    "display_order": 6
+  },
+  {
+    "id": "passport-assistance",
+    "slug": "passport-assistance",
+    "name": "Passport Assistance",
+    "category": "government",
+    "category_name": "Government Services",
+    "icon_name": "Globe",
+    "short_description": "End-to-end guidance for fresh passport applications, renewals, Tatkaal appointments, and PSK/POPSK visit preparation.",
+    "full_description": "Navigating the Passport Seva portal can be confusing. We assist you through online application filling, exact fee payment, appointment booking at Passport Seva Kendra (PSK / POPSK in Panvel / Thane / Mumbai), and compiling the precise original document folder needed for your counter interview and police verification.",
+    "turnaround_time": "Appointment 2-5 days | Dispatch 7-20 days",
+    "popular": 1,
+    "is_active": 1,
+    "who_needs_this": "First-time travelers, professionals seeking overseas employment, students planning higher education abroad, and citizens with expiring passports.",
+    "important_notes": "All original documents must be carried to the Passport Seva Kendra on your appointment date.",
+    "required_documents": [
+      "Aadhaar Card (mandatory primary proof of identity & address)",
+      "PAN Card / Voter ID / Driving Licence (secondary ID proof)",
+      "School Leaving Certificate / 10th Marksheet (proof of Date of Birth & Non-ECR)",
+      "Old Passport original and self-attested copies (for renewal)",
+      "Marriage Certificate or Gazette notification (for surname change post-marriage)"
+    ],
+    "process_steps": [
+      "Profile creation on Passport Seva Portal",
+      "Accurate data entry conforming to school documents",
+      "Slot selection at nearest PSK (e.g. Panvel, Thane, or Lower Parel)",
+      "Fee payment and appointment confirmation sheet generation",
+      "File organization folder check and police verification briefing"
+    ],
+    "related_service_slugs": [
+      "marriage-certificate-assistance",
+      "pan-card-services",
+      "driving-licence-services"
+    ],
+    "display_order": 7
+  },
+  {
+    "id": "driving-licence-services",
+    "slug": "driving-licence-services",
+    "name": "Driving Licence Services",
+    "category": "government",
+    "category_name": "Government Services",
+    "icon_name": "Car",
+    "short_description": "Coordination and application support for Learner Licence (LL), Permanent Driving Licence (DL), slot booking, and renewals.",
+    "full_description": "Comprehensive procedural guidance on the Ministry of Road Transport Sarathi portal. We help you file for two-wheeler and four-wheeler learner licences, book RTO driving test slots (MH-46 Panvel RTO), apply for licence renewals, change addresses, or procure an international driving permit.",
+    "turnaround_time": "7 - 20 Days (RTO Process)",
+    "popular": 0,
+    "is_active": 1,
+    "who_needs_this": "New drivers aged 18+, vehicle owners with expiring licences, and individuals who have relocated to Panvel needing address change in their DL.",
+    "important_notes": "Permanent DL can be applied after 30 days from the issue date of your Learner Licence.",
+    "required_documents": [
+      "Age Proof (Aadhaar Card / School Leaving Certificate / Passport)",
+      "Address Proof (Aadhaar Card / Electricity Bill / Rent Agreement)",
+      "Medical Certificate Form 1A (for commercial licences or age 40+)",
+      "Existing Learner Licence / Driving Licence (for renewal or permanent test)",
+      "Recent passport size photographs"
+    ],
+    "process_steps": [
+      "Sarathi portal application drafting",
+      "Fee payment & test slot booking at MH-46 Panvel RTO",
+      "Learner Licence online exam tutorial and prep material",
+      "Permanent driving test documentation dossier",
+      "Smart card driving licence dispatch follow-up"
+    ],
+    "related_service_slugs": [
+      "pan-card-services",
+      "aadhaar-update-assistance",
+      "vehicle-loan-assistance"
+    ],
+    "display_order": 8
+  },
+  {
+    "id": "online-government-services",
+    "slug": "online-government-services",
+    "name": "Online Government Services",
+    "category": "government",
+    "category_name": "Government Services",
+    "icon_name": "Laptop",
+    "short_description": "One-stop support for state and central citizen portals: Aaple Sarkar, MahaDBT scholarships, voter card registrations, and e-District filings.",
+    "full_description": "Assistance for residents seeking access to the multitude of citizen welfare schemes and digital services provided by the Government of Maharashtra and Central Government. We assist with registration, uploading scanned files, verifying application statuses, and resolving portal rejection errors.",
+    "turnaround_time": "Same Day / Depends on Scheme",
+    "popular": 0,
+    "is_active": 1,
+    "who_needs_this": "College students applying for scholarships, senior citizens, farmers, and families seeking government portal enrollments without digital access.",
+    "important_notes": "We ensure all scanned files strictly adhere to government portal size and resolution specifications.",
+    "required_documents": [
+      "Aadhaar Card and active mobile number",
+      "Caste Certificate / Income Certificate (as per scheme requirements)",
+      "Bank passbook photocopy showing IFSC code",
+      "Educational marksheets (for student scholarships)"
+    ],
+    "process_steps": [
+      "Scheme eligibility screening",
+      "Citizen profile creation on Aaple Sarkar / MahaDBT",
+      "Document resizing, PDF compilation & uploading",
+      "Form submission and receipt issuance"
+    ],
+    "related_service_slugs": [
+      "caste-certificate",
+      "income-certificate",
+      "digital-documentation"
+    ],
+    "display_order": 9
+  },
+  {
+    "id": "digital-documentation",
+    "slug": "digital-documentation",
+    "name": "Digital Documentation & E-Services",
+    "category": "government",
+    "category_name": "Government Services",
+    "icon_name": "FileCode",
+    "short_description": "Assistance with Digital Signature Certificates (DSC Class 3), online affidavits, e-KYC compliance, and official PDF drafting.",
+    "full_description": "Modern business and government filings require high-level digital credentials. We provide coordination for Class 3 Digital Signature tokens (DSC) for GST, MCA, and e-Tendering, along with formatting official representations, self-declaration affidavits, and e-KYC validations.",
+    "turnaround_time": "1 - 2 Working Days",
+    "popular": 0,
+    "is_active": 1,
+    "who_needs_this": "Directors, chartered professionals, government contractors, and citizens requiring e-signatures or formal digitized portfolios.",
+    "important_notes": "Class 3 DSC tokens are valid for 2 or 3 years and are required for corporate MCA and tender portals.",
+    "required_documents": [
+      "Aadhaar Card and PAN Card of applicant",
+      "Passport size photograph",
+      "Active email ID and mobile number for video verification"
+    ],
+    "process_steps": [
+      "DSC application form filling",
+      "Video e-verification guidance",
+      "Cryptographic USB token preparation and driver setup"
+    ],
+    "related_service_slugs": [
+      "gst-registration-filing",
+      "online-government-services",
+      "business-registration"
+    ],
+    "display_order": 10
+  },
+  {
+    "id": "income-certificate",
+    "slug": "income-certificate",
+    "name": "Income Certificate Assistance",
+    "category": "documents-certificates",
+    "category_name": "Documents & Certificates",
+    "icon_name": "Coins",
+    "short_description": "Guidance and document compilation for Tahsildar / Sub-Divisional Income Certificate for school/college admissions and scholarships.",
+    "full_description": "An Income Certificate issued by the competent Revenue Authority (Tehsildar) certifies the annual earnings of an individual or family. It is indispensable for college tuition fee waivers, government scholarships, EWS reservations, and hospital medical aid.",
+    "turnaround_time": "7 - 15 Working Days",
+    "popular": 1,
+    "is_active": 1,
+    "who_needs_this": "Students seeking scholarships or fee concessions, families applying for welfare schemes, and job seekers requiring proof of family income.",
+    "important_notes": "Income certificates are typically valid for 1 financial year or 3 financial years depending on the certificate category chosen.",
+    "required_documents": [
+      "Aadhaar Card and Ration Card copy",
+      "Salary Slip / Form 16 / ITR copy (for employed persons)",
+      "Self-declaration / Affidavit of annual income from all sources",
+      "Talathi / Patwari report (where applicable)",
+      "Electricity Bill as proof of residence in Raigad/Panvel"
+    ],
+    "process_steps": [
+      "Review of income proofs and family member declarations",
+      "Preparation of self-declaration affidavit",
+      "Online application submission on Aaple Sarkar portal",
+      "Follow-up with Panvel Tahsil office",
+      "Digital certificate download with official government QR verification"
+    ],
+    "related_service_slugs": [
+      "domicile-certificate",
+      "caste-certificate",
+      "online-government-services"
+    ],
+    "display_order": 11
+  },
+  {
+    "id": "domicile-certificate",
+    "slug": "domicile-certificate",
+    "name": "Domicile & Age/Nationality Certificate",
+    "category": "documents-certificates",
+    "category_name": "Documents & Certificates",
+    "icon_name": "Home",
+    "short_description": "Assistance for obtaining the official Maharashtra Domicile & Nationality Certificate for state quota educational admissions and government recruitment.",
+    "full_description": "The Domicile Certificate proves a resident has been living in Maharashtra continuously for a minimum period (ordinarily 15 years). It is an absolute requirement for engineering, medical, law, and degree college admissions under the Maharashtra state quota, as well as MPSC and state government jobs.",
+    "turnaround_time": "10 - 20 Working Days",
+    "popular": 1,
+    "is_active": 1,
+    "who_needs_this": "High school and junior college students, job aspirants appearing for Maharashtra state recruitment, and residents establishing legal state domicile.",
+    "important_notes": "A Domicile Certificate has lifetime validity and does not require periodic renewal.",
+    "required_documents": [
+      "Aadhaar Card of student and father/mother",
+      "Proof of continuous 15-year residence (Electricity bills, rent receipts, school records)",
+      "School Leaving Certificate (LC) mentioning place of birth in Maharashtra",
+      "Ration Card copy mentioning applicant name",
+      "Parent Domicile Certificate (if available)",
+      "Passport size photographs"
+    ],
+    "process_steps": [
+      "Residence timeline proof audit",
+      "Affidavit drafting for proof of continuous residence",
+      "Aaple Sarkar portal submission for Panvel Sub-Division",
+      "Liaison and verification tracking",
+      "Delivery of digitally signed Sub-Divisional Officer (SDO) certificate"
+    ],
+    "related_service_slugs": [
+      "income-certificate",
+      "caste-certificate",
+      "passport-assistance"
+    ],
+    "display_order": 12
+  },
+  {
+    "id": "caste-certificate",
+    "slug": "caste-certificate",
+    "name": "Caste Certificate Assistance",
+    "category": "documents-certificates",
+    "category_name": "Documents & Certificates",
+    "icon_name": "Users",
+    "short_description": "Guidance and file preparation for SC, ST, VJNT, OBC, and SBC Caste Certificates from the Sub-Divisional Magistrate / Tehsildar.",
+    "full_description": "Obtaining a genuine Caste Certificate requires meticulous historical genealogical evidence and ancestral residency proof prior to specific cut-off years. We help you systematically compile school leaving certificates, revenue entries, and genealogical trees (vanshavali) to ensure your application passes scrutiny without rejection.",
+    "turnaround_time": "15 - 30 Working Days",
+    "popular": 0,
+    "is_active": 1,
+    "who_needs_this": "Students and job aspirants belonging to reserved categories seeking fee concessions, quota seats, or government employment opportunities.",
+    "important_notes": "Having an older sibling’s or father’s verified caste certificate speeds up the verification process significantly.",
+    "required_documents": [
+      "Applicant School Leaving Certificate and Aadhaar Card",
+      "Father / Grandfather / Uncle Caste Certificate & School Leaving Certificate",
+      "Ancestral proof of residence prior to the relevant base cut-off year",
+      "Family genealogical tree affidavit (Vanshavali) with notarization",
+      "Ration card and electricity bill of current residence"
+    ],
+    "process_steps": [
+      "Ancestral document verification against community cut-off rules",
+      "Notarized Vanshavali affidavit drafting",
+      "Online Aaple Sarkar portal application submission",
+      "Tahsil / SDO office scrutiny follow-up",
+      "Issuance of digitally certified caste certificate"
+    ],
+    "related_service_slugs": [
+      "income-certificate",
+      "domicile-certificate",
+      "online-government-services"
+    ],
+    "display_order": 13
+  },
+  {
+    "id": "marriage-certificate-assistance",
+    "slug": "marriage-certificate-assistance",
+    "name": "Marriage Certificate Assistance",
+    "category": "documents-certificates",
+    "category_name": "Documents & Certificates",
+    "icon_name": "HeartHandshake",
+    "short_description": "Complete coordination for civil and special marriage registration with municipal authorities / Sub-Registrar of Marriages.",
+    "full_description": "A government Marriage Certificate is legally binding proof of marital status required for spouse passport endorsement, spousal visa applications, joint bank accounts, and health insurance. We assist Panvel and Raigad couples with form filing, witness coordination, affidavit drafting, and appointment scheduling at the local municipal office.",
+    "turnaround_time": "7 - 15 Working Days",
+    "popular": 1,
+    "is_active": 1,
+    "who_needs_this": "Newly married couples, spouses applying for overseas visas/immigration, or individuals updating their marital records in government IDs.",
+    "important_notes": "Both spouses and three witnesses must present their original identity cards during the physical verification appointment.",
+    "required_documents": [
+      "Marriage Invitation Card / Hall Receipt / Priest Certificate",
+      "Age and Address Proof of Husband and Wife (Aadhaar, Passport, PAN)",
+      "School Leaving Certificate or Birth Certificate of both spouses",
+      "Marriage ceremony photograph (couple on stage / tying the knot)",
+      "Aadhaar cards and photos of 3 adult witnesses"
+    ],
+    "process_steps": [
+      "Verification of age eligibility and wedding documentation",
+      "Application drafting on the Municipal / Inspector General of Registration (IGR) portal",
+      "Affidavit drafting for both spouses and witnesses",
+      "Appointment booking at Panvel Municipal Corporation or Sub-Registrar",
+      "Physical signing coordination and receipt of registered certificate"
+    ],
+    "related_service_slugs": [
+      "passport-assistance",
+      "pan-card-services",
+      "aadhaar-update-assistance"
+    ],
+    "display_order": 14
+  },
+  {
+    "id": "food-licence",
+    "slug": "food-licence",
+    "name": "Food Licence (FSSAI Registration)",
+    "category": "licences-registrations",
+    "category_name": "Licences & Registrations",
+    "icon_name": "Utensils",
+    "short_description": "FSSAI Basic Registration and State Food Licence filing for food stalls, canteens, restaurants, caterers, and cloud kitchens.",
+    "full_description": "Every food business operator (FBO)—from small street snack vendors and home bakers to restaurants, grocery stores, and cloud kitchens—is required by law to possess an FSSAI 14-digit registration or licence. We handle the entire FoSCoS portal documentation, premises photo submission, and fee processing.",
+    "turnaround_time": "3 - 7 Working Days (Basic Registration)",
+    "popular": 1,
+    "is_active": 1,
+    "who_needs_this": "Restaurants, cafes, home bakeries, sweet shops, canteens, grocery stores, dairy retailers, and food delivery partners (Swiggy/Zomato).",
+    "important_notes": "Operating a food business without an FSSAI certificate can attract heavy penalties from food safety commissioners.",
+    "required_documents": [
+      "Aadhaar Card and PAN Card of Food Business Operator (FBO)",
+      "Passport size photograph of the applicant",
+      "Electricity Bill / Rent Agreement of the kitchen/business location",
+      "NOC from property owner",
+      "List of food product categories to be prepared or sold"
+    ],
+    "process_steps": [
+      "Determination of eligibility: Basic Registration vs. State Licence",
+      "Form A / Form B drafting on FoSCoS portal",
+      "Document compilation and premises proof verification",
+      "Government fee payment and submission",
+      "FSSAI 14-digit certificate delivery with food safety display badge"
+    ],
+    "related_service_slugs": [
+      "business-registration",
+      "msme-udyam-registration",
+      "gst-registration-filing"
+    ],
+    "display_order": 15
+  },
+  {
+    "id": "home-loan-assistance",
+    "slug": "home-loan-assistance",
+    "name": "Home Loan Assistance",
+    "category": "loans-financial",
+    "category_name": "Loans & Financial Assistance",
+    "icon_name": "Home",
+    "short_description": "Comprehensive file preparation, financial profile strengthening, and bank liaison for flat purchase, plot construction, and balance transfers.",
+    "full_description": "Buying a home in Panvel, Pushpak Nagar, or Karanjade is one of life’s biggest milestones. We guide you through the entire documentation maze: organizing your salary slips, ITR files, bank statements, chain of property agreements, and bank sanction requirements across leading public and private banks.",
+    "turnaround_time": "7 - 15 Working Days (Bank Subject)",
+    "popular": 1,
+    "is_active": 1,
+    "who_needs_this": "Salaried employees and self-employed entrepreneurs seeking the most suitable loan options, balance transfer with lower interest rates, or top-up funding.",
+    "important_notes": "Safehands provides administrative coordination and documentation support. Final sanction and interest rates depend entirely on bank discretion and credit score.",
+    "required_documents": [
+      "KYC: PAN Card, Aadhaar Card, Passport photos",
+      "Income Proof: Last 3 months salary slips & 2 years Form 16 (for salaried)",
+      "Business Proof: Last 3 years ITR with computation & audit reports (for business)",
+      "Last 6 to 12 months Bank Account Statements",
+      "Property Documents: Allotment letter, builder agreement, approved building plan copy"
+    ],
+    "process_steps": [
+      "Financial eligibility and debt-to-income ratio evaluation",
+      "Document file compilation and discrepancy cleanup",
+      "Submission to compatible banking and NBFC partners",
+      "Coordination during field verification and legal property inspection",
+      "Sanction letter review and disbursement file support"
+    ],
+    "related_service_slugs": [
+      "mortgage-loan-assistance",
+      "itr-filing",
+      "personal-loan-assistance"
+    ],
+    "display_order": 16
+  },
+  {
+    "id": "personal-loan-assistance",
+    "slug": "personal-loan-assistance",
+    "name": "Personal Loan Assistance",
+    "category": "loans-financial",
+    "category_name": "Loans & Financial Assistance",
+    "icon_name": "Wallet",
+    "short_description": "Quick documentation and application guidance for unsecured personal loans for medical emergencies, weddings, or home renovations.",
+    "full_description": "When you need immediate liquidity without pledging collateral, we help assemble your financial profile to apply for personal loans through reputable banking channels. We ensure your documentation is immaculate to minimize rejection marks on your credit bureau report.",
+    "turnaround_time": "2 - 5 Working Days",
+    "popular": 1,
+    "is_active": 1,
+    "who_needs_this": "Salaried executives and professionals needing urgent funds for family functions, debt consolidation, medical expenses, or personal needs.",
+    "important_notes": "Maintaining a CIBIL score of 750+ significantly enhances approval odds and reduces interest rates.",
+    "required_documents": [
+      "PAN Card and Aadhaar Card",
+      "Last 3 to 6 months salary account bank statements",
+      "Last 3 months salary slips with official company stamps/email payslips",
+      "Company Employee ID card copy",
+      "Current residence address proof"
+    ],
+    "process_steps": [
+      "Preliminary credit profile and eligibility assessment",
+      "Organizing digital payslips and statement PDFs",
+      "Liaison with lending partners offering competitive rates",
+      "Assistance during verification calls",
+      "Disbursement tracking to your bank account"
+    ],
+    "related_service_slugs": [
+      "credit-card-assistance",
+      "home-loan-assistance",
+      "itr-filing"
+    ],
+    "display_order": 17
+  },
+  {
+    "id": "business-loan-assistance",
+    "slug": "business-loan-assistance",
+    "name": "Business Loan Assistance",
+    "category": "loans-financial",
+    "category_name": "Loans & Financial Assistance",
+    "icon_name": "Briefcase",
+    "short_description": "Documentation for working capital, MSME loans, machinery purchase, and business expansion finance.",
+    "full_description": "Fueling business growth requires structured financial dossiers. We help small business owners and shopkeepers in Panvel prepare projected balance sheets, compile GST returns, reconcile bank turnovers, and submit comprehensive loan applications under MSME and CGTMSE schemes.",
+    "turnaround_time": "7 - 20 Working Days",
+    "popular": 0,
+    "is_active": 1,
+    "who_needs_this": "Retailers, wholesalers, manufacturers, contractors, and service agencies looking to invest in inventory, equipment, or business expansion.",
+    "important_notes": "Clean banking transactions with minimal cheque returns are vital for quick business loan approvals.",
+    "required_documents": [
+      "PAN and Aadhaar of Proprietor / Partners / Directors",
+      "Business Registration / Shop Act / Udyam Certificate",
+      "Last 2 to 3 years filed ITR with Balance Sheets & P&L",
+      "Last 12 months current bank account statements",
+      "GST returns (GSTR-3B) for the trailing 12 months"
+    ],
+    "process_steps": [
+      "Evaluation of business cashflow and banking turnover",
+      "Preparation of standard financial dossier",
+      "Introduction to suitable commercial loan officers",
+      "Assistance during on-site stock/business verification",
+      "Disbursement coordination"
+    ],
+    "related_service_slugs": [
+      "msme-udyam-registration",
+      "gst-registration-filing",
+      "mortgage-loan-assistance"
+    ],
+    "display_order": 18
+  },
+  {
+    "id": "vehicle-loan-assistance",
+    "slug": "vehicle-loan-assistance",
+    "name": "Vehicle Loan Assistance",
+    "category": "loans-financial",
+    "category_name": "Loans & Financial Assistance",
+    "icon_name": "Car",
+    "short_description": "Paperwork coordination for new and pre-owned two-wheeler, four-wheeler, and commercial vehicle loans.",
+    "full_description": "Looking to purchase a new car, scooter, or commercial transport vehicle? We assist with assembling proforma invoices from authorized dealerships, your income proofs, and residence verifications to secure transparent vehicle financing.",
+    "turnaround_time": "2 - 5 Working Days",
+    "popular": 0,
+    "is_active": 1,
+    "who_needs_this": "Individuals and commercial drivers purchasing personal cars, bikes, or commercial tempo vehicles in Raigad/Navi Mumbai.",
+    "important_notes": "Pre-owned vehicle loans require formal inspection and RTO hypothecation clearance.",
+    "required_documents": [
+      "Identity & Address Proof (Aadhaar & PAN Card)",
+      "Income Proof (Salary slips or ITR copies)",
+      "Last 6 months bank statement",
+      "Vehicle proforma invoice from showroom or seller valuation report",
+      "Electricity bill of residence"
+    ],
+    "process_steps": [
+      "Selection of dealership quotation",
+      "Loan dossier preparation and income calculation",
+      "Coordination with bank automotive finance branch",
+      "Delivery Order (DO) issuance assistance"
+    ],
+    "related_service_slugs": [
+      "driving-licence-services",
+      "personal-loan-assistance",
+      "insurance-services"
+    ],
+    "display_order": 19
+  },
+  {
+    "id": "mortgage-loan-assistance",
+    "slug": "mortgage-loan-assistance",
+    "name": "Mortgage Loan / Loan Against Property",
+    "category": "loans-financial",
+    "category_name": "Loans & Financial Assistance",
+    "icon_name": "Building2",
+    "short_description": "High-value funding assistance by pledging residential or commercial property as collateral at competitive interest rates.",
+    "full_description": "Loan Against Property (LAP) offers larger funding amounts and longer repayment tenures compared to unsecured loans. We help property owners compile title deeds, index II copies, share certificates, and tax receipts to prepare a watertight mortgage file for institutional lenders.",
+    "turnaround_time": "10 - 20 Working Days",
+    "popular": 0,
+    "is_active": 1,
+    "who_needs_this": "Entrepreneurs, property owners, and high-net-worth individuals requiring funds for business expansion, child’s overseas education, or major capital needs.",
+    "important_notes": "Ensure your property is free of legal disputes and all municipal taxes are paid up to date.",
+    "required_documents": [
+      "Complete chain of property title deeds (Agreement for Sale, Index II)",
+      "Latest Property Tax receipts & Electricity bills",
+      "Society Share Certificate & NOC (if cooperative housing society)",
+      "3 Years ITR filings with complete financial statements",
+      "12 Months Bank Statements of all primary accounts"
+    ],
+    "process_steps": [
+      "Property document preliminary scrutiny",
+      "Title search report and valuation liaison",
+      "Financial file submission to participating institutions",
+      "Equitable mortgage registration coordination",
+      "Fund disbursement to borrower account"
+    ],
+    "related_service_slugs": [
+      "home-loan-assistance",
+      "business-loan-assistance",
+      "itr-filing"
+    ],
+    "display_order": 20
+  },
+  {
+    "id": "credit-card-assistance",
+    "slug": "credit-card-assistance",
+    "name": "Credit Card Assistance",
+    "category": "loans-financial",
+    "category_name": "Loans & Financial Assistance",
+    "icon_name": "CreditCard",
+    "short_description": "Guidance on choosing and applying for credit cards based on salary, CIBIL score, and spending benefits (fuel, travel, cashback).",
+    "full_description": "Navigating credit card offers can be overwhelming. We guide you toward the right card suited to your financial profile—whether you want a lifetime-free card, reward points on fuel/groceries, or a secured card against fixed deposits to rebuild your credit history.",
+    "turnaround_time": "3 - 7 Working Days",
+    "popular": 0,
+    "is_active": 1,
+    "who_needs_this": "Salaried individuals looking to build their CIBIL score or maximize card reward savings.",
+    "important_notes": "Never share your credit card CVV or OTP with anyone over phone or email.",
+    "required_documents": [
+      "Aadhaar Card and PAN Card",
+      "Last 3 months salary slips or latest filed ITR",
+      "Active mobile number and email address"
+    ],
+    "process_steps": [
+      "Eligibility and CIBIL band check",
+      "Digital application submission on official banking portal",
+      "Video KYC completion guidance",
+      "Card tracking to delivery address"
+    ],
+    "related_service_slugs": [
+      "personal-loan-assistance",
+      "pan-card-services",
+      "itr-filing"
+    ],
+    "display_order": 21
+  },
+  {
+    "id": "insurance-services",
+    "slug": "insurance-services",
+    "name": "Insurance Services Coordination",
+    "category": "loans-financial",
+    "category_name": "Loans & Financial Assistance",
+    "icon_name": "ShieldCheck",
+    "short_description": "Guidance and paperwork for two-wheeler, four-wheeler, commercial motor, health, and term life insurance policies.",
+    "full_description": "Protecting your family and vehicle assets against unexpected risks is crucial. We assist with instant vehicle insurance renewals (comprehensive & third-party), policy comparison, health insurance paperwork, and life term policy coordination with leading IRDAI-registered insurers.",
+    "turnaround_time": "Instant / Same Day",
+    "popular": 0,
+    "is_active": 1,
+    "who_needs_this": "Vehicle owners needing immediate insurance for RTO compliance or traffic checks, and families planning healthcare cover.",
+    "important_notes": "Always carry a valid insurance policy and PUC to prevent steep RTO traffic fines.",
+    "required_documents": [
+      "Vehicle RC book / card copy",
+      "Previous insurance policy copy (for renewal with NCB benefit)",
+      "KYC documents of policyholder (Aadhaar & PAN)"
+    ],
+    "process_steps": [
+      "Quote comparison across top insurance providers",
+      "Selection of appropriate add-ons (Zero Dep, Engine Protector, RSA)",
+      "Online premium payment",
+      "Instant policy printout and softcopy delivery via WhatsApp/Email"
+    ],
+    "related_service_slugs": [
+      "vehicle-loan-assistance",
+      "driving-licence-services"
+    ],
+    "display_order": 22
+  },
+  {
+    "id": "railway-ticket-booking-online",
+    "slug": "railway-ticket-booking-online",
+    "name": "Railway Ticket Booking Online",
+    "category": "printing-utility",
+    "category_name": "Printing & Utility Services",
+    "icon_name": "TrainTrack",
+    "short_description": "Prompt assistance for IRCTC online train ticket bookings, Tatkal availability check, waitlist tracking, and seat status inquiries.",
+    "full_description": "Planning a trip from Panvel, Mumbai, or nearby stations to anywhere across India? We provide fast, reliable assistance for booking confirmed train tickets, checking route alternatives, monitoring PNR statuses, and printing journey slips.",
+    "turnaround_time": "Instant / Minutes",
+    "popular": 1,
+    "is_active": 1,
+    "who_needs_this": "Families, travelers, students, and workers traveling from Panvel Junction / CSMT / LTT to Konkan, Gujarat, UP, Bihar, South India, and across the nation.",
+    "important_notes": "Carry an original government photo ID (Aadhaar, PAN, Voter ID) during train travel for ticket verification.",
+    "required_documents": [
+      "Passenger Names, Age, and Gender as per government ID",
+      "Preferred travel date, train number/name, and coach class (Sleeper, 3AC, 2AC, Chair Car)",
+      "Berth preference (Lower, Middle, Upper, Side Lower)",
+      "Contact mobile number for IRCTC SMS updates"
+    ],
+    "process_steps": [
+      "Seat availability check on designated routes",
+      "Passenger details entry and verification",
+      "Booking processing on authorized IRCTC gateway",
+      "Generation and instant printout / WhatsApp PDF dispatch of valid e-ticket"
+    ],
+    "related_service_slugs": [
+      "printing-xerox-scan-lamination",
+      "passport-assistance"
+    ],
+    "display_order": 23
+  },
+  {
+    "id": "printing-xerox-scan-lamination",
+    "slug": "printing-xerox-scan-lamination",
+    "name": "Printing, Xerox, Scan & Lamination",
+    "category": "printing-utility",
+    "category_name": "Printing & Utility Services",
+    "icon_name": "Printer",
+    "short_description": "High-speed B&W and color Xerox, document digitization to high-res PDF, legal paper printing, and heavy-duty card/sheet lamination.",
+    "full_description": "Located conveniently at Hari Vithal Complex, Sector R3, Pushpak Old Panvel, our center is equipped with high-speed digital copiers and color laser printers. We offer legal document drafting prints, double-sided copies, color stamp paper prints, book scanning, and protective lamination for vital certificates.",
+    "turnaround_time": "Instant While You Wait",
+    "popular": 1,
+    "is_active": 1,
+    "who_needs_this": "Residents, students, advocates, contractors, and local business owners needing crisp prints, urgent photocopies, and safe lamination.",
+    "important_notes": "We maintain strict document privacy: your files are deleted after printing is completed.",
+    "required_documents": [
+      "Digital files via WhatsApp / Pen Drive / Email or original paper documents for scanning/copying"
+    ],
+    "process_steps": [
+      "File inspection for proper margins and resolution",
+      "Test print check for color fidelity",
+      "High-speed printing or thermal bubble-free lamination",
+      "Neat stapling or filing"
+    ],
+    "related_service_slugs": [
+      "railway-ticket-booking-online",
+      "digital-documentation"
+    ],
+    "display_order": 24
+  }
+];

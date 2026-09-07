@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Logo } from './Logo';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { CATEGORIES_DATA } from '../data/servicesData';
+import { useData } from '../context/DataContext';
 import { PageRoute, ServiceCategory } from '../types';
 import {
   Phone,
@@ -31,6 +32,13 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenEnquiry,
   onOpenSearch,
 }) => {
+  const { contactDetails } = useData();
+  const primaryPhone = contactDetails?.primaryPhone || '+91 76660 40771';
+  const secondaryPhone = contactDetails?.secondaryPhone || '+91 80977 59771';
+  const whatsappNum = contactDetails?.whatsappNumber || '+91 76660 40771';
+  const cleanWhatsApp = whatsappNum.replace(/\D/g, '');
+  const cleanIntl = cleanWhatsApp.length === 10 ? `91${cleanWhatsApp}` : cleanWhatsApp;
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
@@ -72,21 +80,21 @@ export const Header: React.FC<HeaderProps> = ({
               <Phone className="w-3 h-3 text-amber-400 flex-shrink-0" />
               <span className="text-slate-300 hidden sm:inline">Call:</span>
               <a
-                href="tel:+917666040771"
+                href={`tel:${primaryPhone}`}
                 id="top-bar-call-link-1"
                 className="font-bold hover:text-amber-300 transition-colors"
-                title="Call Safehands 7666040771"
+                title={`Call Safehands ${primaryPhone}`}
               >
-                7666040771
+                {primaryPhone}
               </a>
               <span className="text-blue-300 font-normal select-none">/</span>
               <a
-                href="tel:+918097759771"
+                href={`tel:${secondaryPhone}`}
                 id="top-bar-call-link-2"
                 className="font-bold hover:text-amber-300 transition-colors"
-                title="Call Safehands 8097759771"
+                title={`Call Safehands ${secondaryPhone}`}
               >
-                8097759771
+                {secondaryPhone}
               </a>
             </div>
           </div>
@@ -261,7 +269,7 @@ export const Header: React.FC<HeaderProps> = ({
 
             {/* WhatsApp Quick Direct */}
             <a
-              href="https://wa.me/917666040771?text=Hello%20Safehands%20Enterprises,%20I%20would%20like%20to%20inquire%20about%20your%20services."
+              href={`https://wa.me/${cleanIntl}?text=Hello%20Safehands%20Enterprises,%20I%20would%20like%20to%20inquire%20about%20your%20services.`}
               target="_blank"
               rel="noopener noreferrer"
               id="nav-whatsapp-cta"

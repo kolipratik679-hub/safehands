@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { PageRoute, ServiceCategory } from './types';
+import { DataProvider } from './context/DataContext';
+import { AdminAuthProvider } from './context/AdminAuthContext';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { FloatingActions } from './components/FloatingActions';
 import { SearchModal } from './components/SearchModal';
 import { EnquiryModal } from './components/EnquiryModal';
+import { AdminPage } from './components/admin/AdminPage';
 
 // Pages
 import { HomePage } from './pages/HomePage';
@@ -17,7 +20,7 @@ import { ResourcesPage } from './pages/ResourcesPage';
 import { FaqPage } from './pages/FaqPage';
 import { ContactPage } from './pages/ContactPage';
 
-export default function App() {
+export function AppContent() {
   const [currentRoute, setCurrentRoute] = useState<PageRoute>('home');
   const [currentCategory, setCurrentCategory] = useState<ServiceCategory | undefined>(undefined);
   const [currentServiceSlug, setCurrentServiceSlug] = useState<string | undefined>(undefined);
@@ -27,8 +30,14 @@ export default function App() {
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const [enquiryService, setEnquiryService] = useState<string | undefined>(undefined);
 
-  // Parse location hash on mount & hashchange for browser back/forward and deep linking
+  // Parse location hash and pathname on mount & hashchange for deep linking
   const parseHash = useCallback(() => {
+    // Check if pathname is /admin
+    if (window.location.pathname === '/admin' || window.location.pathname.startsWith('/admin')) {
+      setCurrentRoute('admin');
+      return;
+    }
+
     const hash = window.location.hash.replace(/^#\/?/, '');
     if (!hash) {
       setCurrentRoute('home');
@@ -41,7 +50,9 @@ export default function App() {
     const parts = hash.split('/');
     const root = parts[0];
 
-    if (root === 'services') {
+    if (root === 'admin') {
+      setCurrentRoute('admin');
+    } else if (root === 'services') {
       setCurrentRoute('services');
     } else if (root === 'category' && parts[1]) {
       setCurrentRoute('category');
@@ -73,7 +84,11 @@ export default function App() {
   useEffect(() => {
     parseHash();
     window.addEventListener('hashchange', parseHash);
-    return () => window.removeEventListener('hashchange', parseHash);
+    window.addEventListener('popstate', parseHash);
+    return () => {
+      window.removeEventListener('hashchange', parseHash);
+      window.removeEventListener('popstate', parseHash);
+    };
   }, [parseHash]);
 
   // Navigate helper that updates hash and scrolls to top smoothly
@@ -91,6 +106,7 @@ export default function App() {
     // Update URL hash
     let newHash = '#';
     if (route === 'home') newHash = '#';
+    else if (route === 'admin') newHash = '#admin';
     else if (route === 'services') newHash = '#services';
     else if (route === 'category' && category) newHash = `#category/${category}`;
     else if (route === 'service-detail' && serviceSlug) newHash = `#service/${serviceSlug}`;
@@ -110,12 +126,17 @@ export default function App() {
     setIsEnquiryOpen(true);
   };
 
+  // If viewing the Admin Panel
+  if (currentRoute === 'admin') {
+    return <AdminPage onBackToSite={() => handleNavigate('home')} />;
+  }
+
   return (
     <div className="min-h-screen w-full max-w-full overflow-x-hidden relative flex flex-col bg-[#fcfdfd] text-slate-900 selection:bg-blue-600 selection:text-white font-sans antialiased">
       {/* Header */}
       <Header
         currentRoute={currentRoute}
-        currentCategory={currentCategory}
+        selectedCategory={currentCategory}
         onNavigate={handleNavigate}
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenEnquiry={handleOpenEnquiry}
@@ -139,7 +160,7 @@ export default function App() {
 
         {currentRoute === 'category' && (
           <CategoryServicesPage
-            category={currentCategory || 'government-services'}
+            category={currentCategory || 'government'}
             onNavigate={handleNavigate}
             onOpenEnquiry={handleOpenEnquiry}
           />
@@ -221,5 +242,15 @@ export default function App() {
         prefilledServiceName={enquiryService}
       />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <DataProvider>
+      <AdminAuthProvider>
+        <AppContent />
+      </AdminAuthProvider>
+    </DataProvider>
   );
 }

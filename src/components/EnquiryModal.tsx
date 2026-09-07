@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ALL_SERVICES_DATA } from '../data/servicesData';
+import { useData } from '../context/DataContext';
 import { X, Send, CheckCircle2, Phone, Sparkles, MapPin } from 'lucide-react';
 import { WhatsAppIcon } from './WhatsAppIcon';
 
@@ -14,6 +15,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
   onClose,
   prefilledServiceName,
 }) => {
+  const { submitLead, services, contactDetails } = useData();
   const [name, setName] = useState('');
   const [mobile, setMobile] = useState('');
   const [selectedService, setSelectedService] = useState('');
@@ -36,7 +38,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim()) {
       setError('Please provide your full name.');
@@ -49,9 +51,23 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
     }
     setError('');
     setIsSubmitted(true);
+
+    try {
+      await submitLead({
+        name: name.trim(),
+        phone: mobile.trim(),
+        service: selectedService,
+        locality: locality.trim(),
+        message: message.trim(),
+        source: 'modal_enquiry'
+      });
+    } catch (err) {
+      console.error('Failed to record inquiry lead to database', err);
+    }
   };
 
-  const whatsappUrl = `https://wa.me/917666040771?text=${encodeURIComponent(
+  const whatsappPhone = contactDetails?.whatsappNumber?.replace(/\D/g, '') || '917666040771';
+  const whatsappUrl = `https://wa.me/${whatsappPhone.length === 10 ? `91${whatsappPhone}` : whatsappPhone}?text=${encodeURIComponent(
     `Hello Safehands Enterprises,\nMy Name: ${name}\nMobile: ${mobile}\nLocality: ${locality}\nService Required: ${selectedService}\nDetails: ${message || 'I would like more information and a document checklist.'}`
   )}`;
 
